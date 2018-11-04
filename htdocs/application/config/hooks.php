@@ -16,5 +16,12 @@ $hook['pre_controller'][] = array(
   'filepath' => 'hooks'
 );
 
+$hook['post_controller_constructor'][] = array(
+  'class' => 'rand_cron',
+  'function' => 'rand_cron_method',
+  'filename' => 'rand_cron.php',
+  'filepath' => 'hooks'
+);
+
 /* End of file hooks.php */
 /* Location: ./application/config/hooks.php */
