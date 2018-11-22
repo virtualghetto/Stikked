@@ -451,7 +451,7 @@ class Main extends CI_Controller
 		{
 			$data = $this->_form_prep();
 			$this->content_expiration(config_item('content_expiration'));
-			_view('defaults/paste_form', $data);
+			$this->_view('defaults/paste_form', $data);
 		}
 		else
 		{
@@ -500,7 +500,7 @@ class Main extends CI_Controller
 			if ($this->form_validation->run() == FALSE)
 			{
 				$data = $this->_form_prep();
-				_view('defaults/paste_form', $data);
+				$this->_view('defaults/paste_form', $data);
 			}
 			else
 			{
@@ -667,7 +667,7 @@ class Main extends CI_Controller
 			else
 			{
 				$data = $this->pastes->getLists('lists/', 2);
-				_view('list', $data);
+				$this->view('list', $data);
 			}
 		}
 	}
@@ -684,7 +684,7 @@ class Main extends CI_Controller
 		{
 			$this->load->model('pastes');
 			$data = $this->pastes->getTrends();
-			_view('trends', $data);
+			$this->view('trends', $data);
 		}
 	}
 	
@@ -740,7 +740,7 @@ class Main extends CI_Controller
 	
 	public function about()
 	{
-		_view('about');
+		$this->view('about');
 	}
 	
 	public function captcha()
@@ -767,14 +767,14 @@ class Main extends CI_Controller
 		));
 	}
 	
-	private function _valid_lang($lang)
+	public function _valid_lang($lang)
 	{
 		$this->load->model('languages');
 		$this->form_validation->set_message('_valid_lang', lang('valid_lang'));
 		return $this->languages->valid_language($lang);
 	}
 	
-	private function _valid_captcha($text)
+	public function _valid_captcha($text)
 	{
 		
 		if (config_item('enable_captcha') && $this->session->userdata('is_human') === null)
@@ -852,7 +852,7 @@ class Main extends CI_Controller
 		}
 	}
 	
-	private function _valid_ip()
+	public function _valid_ip()
 	{
 
 		//get ip
@@ -938,7 +938,7 @@ class Main extends CI_Controller
 		}
 	}
 	
-	private function _blockwords_check()
+	public function _blockwords_check()
 	{
 
 		//setup message
@@ -967,7 +967,7 @@ class Main extends CI_Controller
 		return true;
 	}
 	
-	private function _autofill_check()
+	public function _autofill_check()
 	{
 
 		//setup message

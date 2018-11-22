@@ -24,14 +24,14 @@ class Iphone extends CI_Controller
 	{
 		$this->load->model('pastes');
 		$data = $this->pastes->getLists('iphone/');
-		_view('iphone/recent', $data);
+		$this->view('iphone/recent', $data);
 	}
 	
 	public function view()
 	{
 		$this->load->model('pastes');
 		$data = $this->pastes->getPaste(3);
-		_view('iphone/view', $data);
+		$this->view('iphone/view', $data);
 	}
 
 	private function _view($v, $d)

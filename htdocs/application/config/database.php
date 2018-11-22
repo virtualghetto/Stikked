@@ -73,6 +73,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+$CI = &get_instance();
+
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => $CI->config->item('db_hostname'),

@@ -67,7 +67,7 @@ class Spamadmin extends CI_Controller
 
 		//render view
 		$data = $this->pastes->getSpamLists();
-		_view('list_ips', $data);
+		$this->view('list_ips', $data);
 	}
 	
 	public function spam_detail()
@@ -118,7 +118,7 @@ class Spamadmin extends CI_Controller
 		}
 
 		//view
-		_view('spam_detail', $data);
+		$this->view('spam_detail', $data);
 	}
 	
 	public function blacklist()
@@ -148,7 +148,7 @@ class Spamadmin extends CI_Controller
 		$data['pages'] = $this->pagination->create_links();
 
 		//view
-		_view('list_blocked_ips', $data);
+		$this->view('list_blocked_ips', $data);
 	}
 	
 	public function unblock_ip()
