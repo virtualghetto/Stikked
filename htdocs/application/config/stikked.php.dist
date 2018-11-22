@@ -59,7 +59,7 @@ $config['theme'] = 'default';
  * Whether or not to display the QR code
  *
 */
-$config['qr_enabled'] = true;
+$config['qr_enabled'] = FALSE;
 
 /**
  * JavaScript-Editor
