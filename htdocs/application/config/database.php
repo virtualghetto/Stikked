@@ -82,7 +82,7 @@ $db['default'] = array(
 	'password' => $CI->config->item('db_password'),
 	'database' => $CI->config->item('db_database'),
 	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
+	'dbprefix' => $CI->config->item('db_prefix'),
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
