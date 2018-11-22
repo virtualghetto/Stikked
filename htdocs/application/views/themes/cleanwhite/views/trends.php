@@ -1,4 +1,3 @@
-<?php $this->load->view('defaults/header');?>
 <h1><?php echo lang('paste_trending'); ?></h1>
 
 		<?php 
@@ -42,4 +41,3 @@
 		<?php }?>
 <?php echo $pages; ?>
 <div class="spacer"></div>
-<?php $this->load->view('defaults/footer');?>

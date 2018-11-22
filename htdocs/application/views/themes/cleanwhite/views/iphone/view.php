@@ -1,4 +1,3 @@
-<?php $this->load->view('iphone/header'); ?>
 <div class="info">
 	<h1 class="pagetitle"><?php echo $title; ?></h1>
 	<div class="meta">
@@ -8,4 +7,3 @@
 <div class="text_formatted">
 	<?php echo $paste; ?>
 </div>
-<?php $this->load->view('iphone/footer'); ?>

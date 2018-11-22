@@ -1,4 +1,3 @@
-<?php $this->load->view('defaults/header');?>
 <h1><a href="<?php echo site_url('spamadmin'); ?>">Spamadmin</a> - blacklist</h1>
 
 		<?php
@@ -42,4 +41,3 @@
 		<?php }?>
 <?php echo $pages; ?>
 <div class="spacer"></div>
-<?php $this->load->view('defaults/footer');?>

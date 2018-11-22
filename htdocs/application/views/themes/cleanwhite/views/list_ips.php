@@ -1,4 +1,3 @@
-<?php $this->load->view('defaults/header');?>
 <h1>Spamadmin</h1>
 <p><?php echo $total_spam_attempts; ?> spam-pastes repelled. <a href="<?php echo site_url('spamadmin/blacklist'); ?>">View blocked IPs</a>.</p>
 
@@ -42,4 +41,3 @@
 		<?php }?>
 <?php echo $pages; ?>
 <div class="spacer"></div>
-<?php $this->load->view('defaults/footer');?>

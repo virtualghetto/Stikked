@@ -1,4 +1,3 @@
-<?php $this->load->view('defaults/header'); ?>
     <?php
         $message = $this->db_session->flashdata('login_error');
         if ($message){
@@ -29,4 +28,3 @@
       <?php echo form_fieldset_close(); ?>
     </div>
       
-<?php $this->load->view('defaults/footer'); ?>

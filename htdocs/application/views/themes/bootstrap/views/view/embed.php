@@ -53,7 +53,7 @@ $this->carabiner->display('css');
 <?php
 
 //stats
-$this->load->view('defaults/stats');
+$this->load->view('themes/' . config_item('theme') . '/views/defaults/stats');
 
 ?>
 <script>

@@ -1,4 +1,4 @@
-<?php $this->load->view('defaults/header');
+<?php
 
 $seg3 = $this->uri->segment(3);
 
@@ -117,9 +117,8 @@ if(isset($insert)){
 		<?php 
 			$reply_form['page']['title'] = lang('paste_replyto') . ' "' . $title . '"';
 			$reply_form['page']['instructions'] = lang('paste_replyto_desc');
-		$this->load->view('defaults/paste_form', $reply_form); ?>
+		$this->load->view('themes/' . config_item('theme') . '/views/defaults/paste_form', $reply_form); ?>
 	</div>
 
 </div>
 
-<?php $this->load->view('view/view_footer'); ?>

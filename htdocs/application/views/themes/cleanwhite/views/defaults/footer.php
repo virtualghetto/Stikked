@@ -1,6 +1,6 @@
 					</div>
 				</div>
-			<?php $this->load->view('defaults/footer_message'); ?>
+			<?php $this->load->view('themes/' . config_item('theme') . '/views/defaults/footer_message'); ?>
 			</div>
 		</div>	
 <?php

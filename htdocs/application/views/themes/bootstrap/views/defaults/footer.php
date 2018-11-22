@@ -1,9 +1,9 @@
-			<?php $this->load->view('defaults/footer_message'); ?>
+			<?php $this->load->view('themes/' . config_item('theme') . '/views/defaults/footer_message'); ?>
 		</div>
 <?php
 
 //stats
-$this->load->view('defaults/stats');
+$this->load->view('themes/' . config_item('theme') . '/views/defaults/stats');
 
 //codemirror modes
 if(isset($codemirror_modes)){

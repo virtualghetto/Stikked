@@ -1,4 +1,3 @@
-			<?php $this->load->view('defaults/footer_message'); ?>
 		</div>
 <?php
 
@@ -13,7 +12,7 @@ if(isset($ace_modes)){
 }
 
 //stats
-$this->load->view('defaults/stats');
+$this->load->view('themes/' . config_item('theme') . '/views/defaults/stats');
 
 //Javascript
 $this->carabiner->js('jquery.js');

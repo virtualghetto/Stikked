@@ -1,4 +1,3 @@
-<?php $this->load->view("defaults/header");?>
 
 <div class="row">
 	<div class="span12">
@@ -84,4 +83,3 @@
 	</div>
 </div>
 
-<?php $this->load->view("defaults/footer");?>

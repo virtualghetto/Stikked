@@ -1,4 +1,3 @@
-<?php $this->load->view("defaults/header");?>
 
 <div class="api">
 	<h1>API</h1>
@@ -79,4 +78,3 @@
 
 </div>
 
-<?php $this->load->view("defaults/footer");?>
