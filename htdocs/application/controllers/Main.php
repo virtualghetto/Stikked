@@ -667,7 +667,7 @@ class Main extends CI_Controller
 			else
 			{
 				$data = $this->pastes->getLists('lists/', 2);
-				$this->view('list', $data);
+				$this->_view('list', $data);
 			}
 		}
 	}
@@ -684,7 +684,7 @@ class Main extends CI_Controller
 		{
 			$this->load->model('pastes');
 			$data = $this->pastes->getTrends();
-			$this->view('trends', $data);
+			$this->_view('trends', $data);
 		}
 	}
 	
@@ -740,7 +740,7 @@ class Main extends CI_Controller
 	
 	public function about()
 	{
-		$this->view('about');
+		$this->_view('about');
 	}
 	
 	public function captcha()
