@@ -564,6 +564,7 @@ class Pastes extends CI_Model
 				{
 					foreach ($query->result_array() as $row) 
 					{
+/*
 
 						//diff
 						//yes, I'm aware, two times htmlspecialchars_decode(). Needs to be, since it's saved that way in the DB from the original stikked author ages ago ;)
@@ -574,6 +575,23 @@ class Pastes extends CI_Model
 						$opcodes = FineDiff::getDiffOpcodes($from_text, $to_text, FineDiff::$wordGranularity);
 						$to_text = FineDiff::renderToTextFromOpcodes($from_text, $opcodes);
 						$data['paste'] = htmlspecialchars_decode($this->_format_diff(nl2br(FineDiff::renderDiffToHTMLFromOpcodes($from_text, $opcodes))));
+*/
+
+						include_once (APPPATH . '/libraries/Diff.php');
+						$oldpost = htmlspecialchars_decode(utf8_decode($row['raw']));
+						$newpost = htmlspecialchars_decode(utf8_decode($data['raw']));
+						$a1=explode("\n", $newpost);
+						$a2=explode("\n", $oldpost);
+
+						$diff=new Diff($a2,$a1, 1);
+						$data['paste'] = $diff->output;
+
+						//echo "<table cellpadding=\"0\" cellspacing=\"0\" class=\"diff\">";
+						//echo "<tr><td></td><td></td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td></td></tr>";
+						//echo $diff->output;
+						//echo "</table>";
+
+
 					}
 				}
 				else
