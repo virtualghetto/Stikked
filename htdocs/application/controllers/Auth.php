@@ -28,7 +28,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
     You should have received a copy of the GNU General Public License
     along with Auth_Ldap.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
 */
 /**
  * @author      Greg Wojtak <gwojtak@techrockdo.com>
@@ -41,7 +41,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Auth extends CI_Controller
 {
 	
-	function __construct() 
+	function __construct()
 	{
 		parent::__construct();
 		$this->load->helper('form');
@@ -51,17 +51,17 @@ class Auth extends CI_Controller
 		$this->load->library('table');
 	}
 	
-	function index() 
+	function index()
 	{
 		$this->session->keep_flashdata('tried_to');
 		$this->login();
 	}
 	
-	function login($errorMsg = NULL) 
+	function login($errorMsg = NULL)
 	{
 		$this->session->keep_flashdata('tried_to');
 		
-		if (!$this->auth_ldap->is_authenticated()) 
+		if (!$this->auth_ldap->is_authenticated())
 		{
 
 			// Set up rules for form validation
@@ -71,12 +71,12 @@ class Auth extends CI_Controller
 
 			// Do the login...
 			
-			if ($rules->run() && $this->auth_ldap->login($rules->set_value('username') , $rules->set_value('password'))) 
+			if ($rules->run() && $this->auth_ldap->login($rules->set_value('username') , $rules->set_value('password')))
 			{
 
 				// Login WIN!
 				
-				if ($this->session->flashdata('tried_to')) 
+				if ($this->session->flashdata('tried_to'))
 				{
 					redirect($this->session->flashdata('tried_to'));
 				}
@@ -101,10 +101,10 @@ class Auth extends CI_Controller
 		}
 	}
 	
-	function logout() 
+	function logout()
 	{
 		
-		if ($this->session->userdata('logged_in')) 
+		if ($this->session->userdata('logged_in'))
 		{
 			$data['name'] = $this->session->userdata('cn');
 			$data['username'] = $this->session->userdata('username');
@@ -117,8 +117,8 @@ class Auth extends CI_Controller
 		}
 		redirect('/');
 	}
-	public 
-	function alpha_dash_dot($str) 
+
+	public function alpha_dash_dot($str)
 	{
 		return (!preg_match("/^([-a-z0-9_\-\.])+$/i", $str)) ? FALSE : TRUE;
 	}
