@@ -17,6 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<th class="name">Name</th>
 						<th class="time">When</th>
 						<th class="time">IP</th>
+						<th class="title">Delete</th>
 						<th title="Quick remove" class="hidden">X</th>
 					</tr>
 		<?php	foreach($pastes as $paste) {
@@ -33,6 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<td><?php echo $paste['name']; ?></td>
 			<td><?php $p = explode(",", timespan($paste['created'], time())); echo $p[0]; ?> ago.</td>
 			<td><a href="<?php echo site_url('spamadmin/' . $paste['ip_address']) ?>"><?php echo $paste['ip_address']; ?></a></td>
+			<td class="title"><a href="<?php echo site_url("spamadmin/del/".$paste['pid']); ?>"><?php echo $paste['pid']; ?></a></td>
 			<td class="hidden"><a class="quick_remove" title="Quickly remove all entries with this IP" data-ip="<?php echo $paste['ip_address']; ?>" href="">X</a></td>
 		</tr>
 
