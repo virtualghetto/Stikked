@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
     <?php
         $message = $this->db_session->flashdata('login_error');
         if ($message){

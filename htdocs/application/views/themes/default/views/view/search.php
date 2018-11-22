@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <form action="">
     <div class="item_group searchgroup">
         <div class="item">

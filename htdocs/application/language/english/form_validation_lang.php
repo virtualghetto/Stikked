@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['required']			= "The %s field is required.";
 $lang['not_allowed']		= "You are not allowed to paste.";

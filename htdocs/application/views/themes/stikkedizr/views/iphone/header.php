@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Sliict//EN"
 	"http://www.w3.org/li/xhtml1/DTD/xhtml1-sliict.dtd">
 <html>

@@ -1,4 +1,7 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+<?php
 /**
  * Class and Function List:
  * Function list:

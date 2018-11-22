@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <h1><?php echo lang('paste_trending'); ?></h1>
 
 		<?php 

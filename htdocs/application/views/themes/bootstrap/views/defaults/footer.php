@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 			<?php $this->load->view('themes/' . config_item('theme') . '/views/defaults/footer_message'); ?>
 		</div>
 <?php

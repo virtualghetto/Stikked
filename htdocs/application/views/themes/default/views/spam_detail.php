@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <h1><a href="<?php echo site_url('spamadmin'); ?>">Spamadmin</a> - Pastes for ip <?php echo $ip_address; ?></h1>
 
 <div class="space">&nbsp;</div>

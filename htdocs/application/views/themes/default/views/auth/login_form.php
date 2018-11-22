@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <?php $this->load->view('themes/' . config_item('theme') . '/views/defaults/header'); ?>
     <?php
         $message = $this->session->flashdata('login_error');

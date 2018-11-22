@@ -1,4 +1,7 @@
-﻿<?php echo validation_errors(); ?>
+﻿<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+<?php echo validation_errors(); ?>
 
 <div class="row">
 	<div class="col-12 col-sm-12 col-lg-12">
