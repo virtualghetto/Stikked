@@ -10,12 +10,6 @@
 |
 */
 
-$hook['pre_controller'][] = array(
-  'function' => 'pick_language',
-  'filename' => 'pick_language.php',
-  'filepath' => 'hooks'
-);
-
 $hook['post_controller_constructor'][] = array(
   'class' => 'rand_cron',
   'function' => 'rand_cron_method',
