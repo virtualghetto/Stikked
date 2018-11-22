@@ -98,7 +98,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									"40320" => lang('exp_1m'),
 									"483840" => lang('exp_1y'),
 								);
-                    if(! config_item('disable_keep_forever')) {
+                    if(!config_item('disable_keep_forever')) {
                         $options['0'] = lang('exp_forever');
                     }
 				echo form_dropdown('expire', $options, $expire_set, $expire_extra); ?>
