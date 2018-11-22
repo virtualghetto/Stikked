@@ -283,11 +283,20 @@ class FineDiff {
 		}
 
 	/**------------------------------------------------------------------------
-	* Render the diff to an HTML string
+	* Render the diff to an HTML string -- UTF8 unsafe
 	*/
 	public static function renderDiffToHTMLFromOpcodes($from, $opcodes) {
 		ob_start();
 		FineDiff::renderFromOpcodes($from, $opcodes, array('FineDiff','renderDiffToHTMLFromOpcode'));
+		return ob_get_clean();
+		}
+
+	/**------------------------------------------------------------------------
+	* Render the diff to an HTML string -- UTF8 safe
+	*/
+	public static function renderUTF8DiffToHTMLFromOpcodes($from, $opcodes) {
+		ob_start();
+		FineDiff::renderUTF8FromOpcode($from, $opcodes, array('FineDiff','renderDiffToHTMLFromOpcode'));
 		return ob_get_clean();
 		}
 
@@ -325,6 +334,61 @@ class FineDiff {
 				}
 			}
 		}
+
+	/**------------------------------------------------------------------------
+	* Generic opcodes parser, user must supply callback for handling
+	* single opcode
+	*/
+	private static function renderUTF8FromOpcode($from, $opcodes, $callback) {
+		if ( !is_callable($callback) ) {
+			return;
+			}
+        $from_len = strlen($from);
+		$opcodes_len = strlen($opcodes);
+		$from_offset = $opcodes_offset = 0;
+        $last_to_chars = '';
+		while ( $opcodes_offset <  $opcodes_len ) {
+			$opcode = substr($opcodes, $opcodes_offset, 1);
+			$opcodes_offset++;
+			$n = intval(substr($opcodes, $opcodes_offset));
+			if ( $n ) {
+				$opcodes_offset += strlen(strval($n));
+				}
+			else {
+				$n = 1;
+				}
+            if ( $opcode === 'c' || $opcode === 'd' ) {
+                $beg = $from_offset;
+                $end = $from_offset + $n;
+                while ( $beg > 0 && (ord($from[$beg]) & 0xC0) === 0x80 ) { $beg--; }
+                while ( $end < $from_len && (ord($from[$end]) & 0xC0) === 0x80 ) { $end++; }
+                if ( $opcode === 'c' ) { // copy n characters from source
+                    call_user_func($callback, 'c', $from, $beg, $end - $beg, '');
+                    $last_to_chars = substr($from, $from, $beg, $end - $beg);
+                    }
+                else /* if ( $opcode === 'd' ) */ { // delete n characters from source
+                    call_user_func($callback, 'd', $from, $beg, $end - $beg, '');
+                    }
+                $from_offset += $n;
+                }
+			else /* if ( $opcode === 'i' ) */ { // insert n characters from opcodes
+				$opcodes_offset += 1;
+                if ( strlen($last_to_chars) > 0 && (ord($opcodes[$opcodes_offset]) & 0xC0) === 0x80 ) {
+                    $beg = strlen($last_to_chars) - 1;
+                    while ( $beg > 0 && (ord($last_to_chars[$beg]) & 0xC0) === 0x80 ) { $beg--; }
+                    $prefix = substr($last_to_chars, $beg);
+                } else {
+                    $prefix = '';
+                }
+                $end = $from_offset;
+                while ( $end < $from_len && (ord($from[$end]) & 0xC0) === 0x80 ) { $end++; }
+                $toInsert = $prefix . substr($opcodes, $opcodes_offset, $n) . substr($from, $end, $end - $from_offset);
+                call_user_func($callback, 'i', $toInsert, 0, strlen($toInsert));
+				$opcodes_offset += $n;
+                $last_to_chars = $toInsert;
+                }
+            }
+        }
 
 	/**
 	* Stock granularity stacks and delimiters
@@ -671,17 +735,17 @@ class FineDiff {
 
 	private static function renderDiffToHTMLFromOpcode($opcode, $from, $from_offset, $from_len) {
 		if ( $opcode === 'c' ) {
-			echo htmlentities(htmlentities(substr($from, $from_offset, $from_len)));
+			echo htmlspecialchars(substr($from, $from_offset, $from_len));
 			}
 		else if ( $opcode === 'd' ) {
 			$deletion = substr($from, $from_offset, $from_len);
 			if ( strcspn($deletion, " \n\r") === 0 ) {
 				$deletion = str_replace(array("\n","\r"), array('\n','\r'), $deletion);
 				}
-			echo '<del>', htmlentities(htmlentities($deletion)), '</del>';
+			echo '<del>', htmlspecialchars($deletion), '</del>';
 			}
 		else /* if ( $opcode === 'i' ) */ {
- 			echo '<ins>', htmlentities(htmlentities(substr($from, $from_offset, $from_len))), '</ins>';
+ 			echo '<ins>', htmlspecialchars(substr($from, $from_offset, $from_len)), '</ins>';
 			}
 		}
 	}
