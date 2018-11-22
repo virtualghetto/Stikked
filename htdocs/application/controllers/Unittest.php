@@ -11,19 +11,19 @@
 class Unittest extends CI_Controller
 {
 	
-	function __construct() 
+	public function __construct()
 	{
 		parent::__construct();
 
 		//protection
 		
-		if ($_SERVER['HTTP_HOST'] != 'stikked') 
+		if ($_SERVER['HTTP_HOST'] != 'stikked')
 		{
 			exit;
 		}
 	}
 	
-	function index() 
+	public function index()
 	{
 		$this->load->library('unit_test');
 		$this->load->model('pastes');

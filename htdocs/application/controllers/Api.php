@@ -18,36 +18,35 @@ include_once ('application/controllers/Main.php');
 class Api extends Main
 {
 	
-	function __construct() 
+	public function __construct()
 	{
 		parent::__construct();
 		
-		if (config_item('disable_api')) 
+		if (config_item('disable_api'))
 		{
 			die("The API has been disabled\n");
 		}
 
-        // if ldap is configured and no api token is configured, fail the request
-        if ((config_item('require_auth') == true) && (config_item('apikey') == ''))
-        {
-             die("API key not configured");
-        }
-
+		// if ldap is configured and no api token is configured, fail the request
+		if ((config_item('require_auth') == true) && (config_item('apikey') == ''))
+		{
+			die("API key not configured");
+		}
 	}
-	
-	function index() 
+
+	public function index()
 	{
 		$languages = $this->languages->get_languages();
 		$languages = array_keys($languages);
 		$languages = implode(', ', $languages);
 		$data['languages'] = $languages;
-		$this->load->view('api_help', $data);
+		_view('api_help', $data);
 	}
 	
-	function create() 
+	public function create()
 	{
 		
-		if (config_item('apikey') != $this->input->get('apikey') && config_item('soft_api') == false) 
+		if (config_item('apikey') != $this->input->get('apikey') && config_item('soft_api') == false)
 		{
 			die("Invalid API key\n");
 		}
@@ -55,33 +54,33 @@ class Api extends Main
 		$this->load->library('form_validation'); //needed by parent class
 
 		
-		if (!$this->input->post('text')) 
+		if (!$this->input->post('text'))
 		{
 			$data['msg'] = 'Error: Missing paste text';
-			$this->load->view('view/api', $data);
+			$this->load->view('themes/default/views/view/api', $data);
 		}
 		else
 		{
 			
-			if (!$this->input->post('lang')) 
+			if (!$this->input->post('lang'))
 			{
 				$_POST['lang'] = 'text';
 			}
 			$_POST['code'] = $this->input->post('text');
 			
-			if ($this->config->item('private_only')) 
+			if ($this->config->item('private_only'))
 			{
 				$_POST['private'] = 1;
 			}
 
 			//validations
 			
-			if (!$this->_valid_ip()) 
+			if (!$this->_valid_ip())
 			{
 				die("You are not allowed to paste\n");
 			}
 			
-			if (config_item('soft_api') == true && (config_item('apikey') == $this->input->get('apikey'))) 
+			if (config_item('soft_api') == true && (config_item('apikey') == $this->input->get('apikey')))
 			{
 
 				//pass
@@ -90,13 +89,13 @@ class Api extends Main
 			else
 			{
 				
-				if (!$this->_blockwords_check()) 
+				if (!$this->_blockwords_check())
 				{
 					die("Your paste contains blocked words\n");
 				}
 			}
 
-			if (!$this->input->post('expire')) 
+			if (!$this->input->post('expire'))
 			{
 				$_POST['expire'] = config_item('default_expiration');
 			}
@@ -104,26 +103,26 @@ class Api extends Main
 			//create paste
 			$paste_url = $this->pastes->createPaste();
 			$data['msg'] = base_url() . $paste_url;
-			$this->load->view('view/api', $data);
+			$this->load->view('themes/default/views/view/api', $data);
 		}
 	}
 	
-	function paste() 
+	public function paste()
 	{
 		
-		if (config_item('apikey') != $this->input->get('apikey')) 
+		if (config_item('apikey') != $this->input->get('apikey'))
 		{
 			die("Invalid API key\n");
 		}
 		
-		if (config_item('private_only')) 
+		if (config_item('private_only'))
 		{
 			show_404();
 		}
 		$this->load->model('pastes');
 		$check = $this->pastes->checkPaste(3);
 		
-		if ($check) 
+		if ($check)
 		{
 			$data = $this->pastes->getPaste(3);
 		}
@@ -136,15 +135,15 @@ class Api extends Main
 		echo json_encode($data);
 	}
 	
-	function random() 
+	public function random()
 	{
 		
-		if (config_item('apikey') != $this->input->get('apikey')) 
+		if (config_item('apikey') != $this->input->get('apikey'))
 		{
 			die("Invalid API key\n");
 		}
 		
-		if (config_item('private_only')) 
+		if (config_item('private_only'))
 		{
 			show_404();
 		}
@@ -153,15 +152,15 @@ class Api extends Main
 		echo json_encode($data);
 	}
 	
-	function recent() 
+	public function recent()
 	{
 		
-		if (config_item('apikey') != $this->input->get('apikey')) 
+		if (config_item('apikey') != $this->input->get('apikey'))
 		{
 			die("Invalid API key\n");
 		}
 		
-		if (config_item('private_only')) 
+		if (config_item('private_only'))
 		{
 			show_404();
 		}
@@ -169,7 +168,7 @@ class Api extends Main
 		$pastes = $this->pastes->getLists('api/recent');
 		$pastes = $pastes['pastes'];
 		$data = array();
-		foreach ($pastes as $paste) 
+		foreach ($pastes as $paste)
 		{
 			$data[] = array(
 				'pid' => $paste['pid'],
@@ -182,15 +181,15 @@ class Api extends Main
 		echo json_encode($data);
 	}
 	
-	function trending() 
+	public function trending()
 	{
 		
-		if (config_item('apikey') != $this->input->get('apikey')) 
+		if (config_item('apikey') != $this->input->get('apikey'))
 		{
 			die("Invalid API key\n");
 		}
 		
-		if (config_item('private_only')) 
+		if (config_item('private_only'))
 		{
 			show_404();
 		}
@@ -198,7 +197,7 @@ class Api extends Main
 		$pastes = $this->pastes->getTrends('api/trending', 2);
 		$pastes = $pastes['pastes'];
 		$data = array();
-		foreach ($pastes as $paste) 
+		foreach ($pastes as $paste)
 		{
 			$data[] = array(
 				'pid' => $paste['pid'],
@@ -212,14 +211,22 @@ class Api extends Main
 		echo json_encode($data);
 	}
 	
-	function langs() 
+	public function langs()
 	{
-		if (config_item('apikey') != $this->input->get('apikey')) 
+		if (config_item('apikey') != $this->input->get('apikey'))
 		{
 			die("Invalid API key\n");
 		}
 		
 		$languages = $this->languages->get_languages();
 		echo json_encode($languages);
+	}
+
+	private function _view($v, $d)
+	{
+		$this->theme = config_item('theme');
+		$this->load->view('themes/' . $this->theme . '/views/defaults/header');
+		$this->load->view('themes/' . $this->theme . '/views/' . $v, $d);
+		$this->load->view('themes/' . $this->theme . '/views/defaults/footer');
 	}
 }

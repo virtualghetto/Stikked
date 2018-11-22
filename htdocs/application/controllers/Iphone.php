@@ -12,23 +12,31 @@
 class Iphone extends CI_Controller
 {
 	
-	function __construct() 
+	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('languages');
 	}
 	
-	function index() 
+	public function index()
 	{
 		$this->load->model('pastes');
 		$data = $this->pastes->getLists('iphone/');
-		$this->load->view('iphone/recent', $data);
+		_view('iphone/recent', $data);
 	}
 	
-	function view() 
+	public function view()
 	{
 		$this->load->model('pastes');
 		$data = $this->pastes->getPaste(3);
-		$this->load->view('iphone/view', $data);
+		_view('iphone/view', $data);
+	}
+
+	private function _view($v, $d)
+	{
+		$this->theme = config_item('theme');
+		$this->load->view('themes/' . $this->theme . '/views/iphone/header');
+		$this->load->view('themes/' . $this->theme . '/views/' . $v, $d);
+		$this->load->view('themes/' . $this->theme . '/views/iphone/footer');
 	}
 }

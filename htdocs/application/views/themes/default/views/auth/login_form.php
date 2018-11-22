@@ -1,4 +1,4 @@
-<?php $this->load->view('defaults/header'); ?>
+<?php $this->load->view('themes/' . config_item('theme') . '/views/defaults/header'); ?>
     <?php
         $message = $this->session->flashdata('login_error');
         if ($message){
@@ -29,4 +29,4 @@
       <?php echo form_fieldset_close(); ?>
     </div>
       
-<?php $this->load->view('defaults/footer'); ?>
+<?php $this->load->view('themes/' . config_item('theme') . '/views/defaults/footer'); ?>

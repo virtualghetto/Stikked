@@ -90,7 +90,7 @@ class Auth extends CI_Controller
 
 				// Login FAIL
 				$this->session->set_flashdata('login_error', 'Incorrect username or password.');
-				$this->load->view('auth/login_form');
+				$this->load->view('themes/' . config_item('theme') . '/views/auth/login_form');
 			}
 		}
 		else
