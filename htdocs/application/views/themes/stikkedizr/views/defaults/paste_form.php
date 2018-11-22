@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <?php echo validation_errors(); ?>
@@ -97,10 +97,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							$options = array(
 							
 											"burn" => lang('exp_burn'),
+											"5" => lang('exp_5min'),
 											"60" => lang('exp_1h'),
 											"1440" => lang('exp_1d'),
+											"10080" => lang('exp_1w'),
 											"40320" => lang('exp_1m'),
+											"483840" => lang('exp_1y'),
 									);
+                    if(!config_item('disable_keep_forever')) {
+                        $options['0'] = lang('exp_forever');
+                    }
 						echo form_dropdown('expire', $options, $expire_set, $expire_extra); ?>
 					</div>
 				</div>
