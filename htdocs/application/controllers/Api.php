@@ -42,7 +42,7 @@ class Api extends Main
 		$languages = array_keys($languages);
 		$languages = implode(', ', $languages);
 		$data['languages'] = $languages;
-		$this->view('api_help', $data);
+		$this->_view('api_help', $data);
 	}
 	
 	public function create()

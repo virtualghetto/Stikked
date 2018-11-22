@@ -740,7 +740,7 @@ class Main extends CI_Controller
 	
 	public function about()
 	{
-		$this->_view('about');
+		$this->_view('about', array());
 	}
 	
 	public function captcha()
