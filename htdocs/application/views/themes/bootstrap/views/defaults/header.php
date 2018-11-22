@@ -44,6 +44,30 @@ $searchparams = ($this->input->get('search') ? '?search=' . $this->input->get('s
 	var base_url = '<?php echo base_url(); ?>';
 	//]]>
 	</script>
+<?php
+
+//Javascript
+$this->carabiner->js('bootstrap.min.js');
+$this->carabiner->js('filereader.js');
+$this->carabiner->js('jquery-ui-selectable-combined.min.js');
+$this->carabiner->js('jquery.dataTables.min.js');
+$this->carabiner->js('jquery.js');
+$this->carabiner->js('jquery.timers.js');
+$this->carabiner->js('linkify-jquery.min.js');
+$this->carabiner->js('linkify.min.js');
+$this->carabiner->js('lz-string-1.3.3-min.js');
+$this->carabiner->js('stikked.js');
+
+if(config_item('js_editor') == 'codemirror') {
+    $this->carabiner->js('codemirror/lib/codemirror.js');
+}
+if(config_item('js_editor') == 'ace') {
+    $this->carabiner->js('ace/ace.js');
+}
+
+$this->carabiner->display('js');
+
+?>
 	</head>
 	<body>		
 		<header>

@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-		</div>
 <?php
 
 //codemirror modes
@@ -17,24 +16,9 @@ if(isset($ace_modes)){
 //stats
 $this->load->view('themes/' . config_item('theme') . '/views/defaults/stats');
 
-//Javascript
-$this->carabiner->js('jquery.js');
-$this->carabiner->js('jquery.timers.js');
-$this->carabiner->js('crypto-js/rollups/aes.js');
-$this->carabiner->js('lz-string-1.3.3-min.js');
-$this->carabiner->js('filereader.js');
-$this->carabiner->js('linkify.min.js');
-$this->carabiner->js('linkify-jquery.min.js');
-if(config_item('js_editor') == 'codemirror') {
-    $this->carabiner->js('codemirror/codemirror.js');
-}
-if(config_item('js_editor') == 'ace') {
-    $this->carabiner->js('ace/ace.js');
-}
-$this->carabiner->js('stikked.js');
-
-$this->carabiner->display('js');
-
 ?>
+<div><footer class="footer">
+	<?php echo lang('powered_by'); ?> <a href="https://github.com/claudehohl/Stikked">Stikked<!-- version <?php echo config_item('stikked_version'); ?> --></a>
+</footer></div>
 	</body>
 </html>

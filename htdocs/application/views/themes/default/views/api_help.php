@@ -60,23 +60,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<h2>Examples</h2>
 	<h3>Create paste</h3>
-	<code>curl -d text='this is my text' <?php echo site_url('api/create'); ?></code>
+	<code>curl --socks5-hostname 127.0.0.1:9150 -d text='this is my text' <?php echo site_url('api/create'); ?></code>
     <p class="explain">Create a paste with the text 'this is my text'.</p>
 
 	<h3>Create paste from a file</h3>
-	<code>curl -d private=1 -d name=Herbert --data-urlencode text@/etc/passwd <?php echo site_url('api/create'); ?></code>
+	<code>curl --socks5-hostname 127.0.0.1:9150 -d private=1 -d name=Herbert --data-urlencode text@/etc/passwd <?php echo site_url('api/create'); ?></code>
     <p class="explain">Create a private paste with the author 'Herbert' and the contents of '/etc/passwd'.</p>
 
 	<h3>Create paste from a php file</h3>
-	<code>curl -d lang=php --data-urlencode text@main.php <?php echo site_url('api/create'); ?></code>
+	<code>curl --socks5-hostname 127.0.0.1:9150 -d lang=php --data-urlencode text@main.php <?php echo site_url('api/create'); ?></code>
     <p class="explain">Create a paste with PHP syntax highlighting.</p>
 
     <h3>Create paste via a pipe</h3>
-    <code>echo foo | curl --data-urlencode text@- <?php echo site_url('api/create'); ?></code>
+    <code>echo foo | curl --socks5-hostname 127.0.0.1:9150 --data-urlencode text@- <?php echo site_url('api/create'); ?></code>
     <p class="explain">Create a paste based on standard output of a command.</p>
 
 	<h3>Get paste ;-)</h3>
-	<code>curl <?php echo site_url('view/raw/[pasteid]'); ?></code>
+	<code>curl --socks5-hostname 127.0.0.1:9150 <?php echo site_url('view/raw/[pasteid]'); ?></code>
     <p class="explain">Display paste.</p>
 
 </div>

@@ -61,7 +61,5 @@ $this->carabiner->display('css');
 <?php
 
 ?>
-<script>
-</script>
 	</body>
 </html>

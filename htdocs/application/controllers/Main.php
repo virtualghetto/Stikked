@@ -711,10 +711,7 @@ class Main extends CI_Controller
 			}
 			$this->content_expiration(config_item('content_expiration'));
 			$this->theme = config_item('theme');
-			$this->load->view('themes/' . $this->theme . '/views/defaults/header');
-			$this->load->view('themes/' . $this->theme . '/views/view/view', $data);
-			$this->load->view('themes/' . $this->theme . '/views/defaults/footer_message');
-			$this->load->view('themes/' . $this->theme . '/views/view/view_footer');
+			$this->_view('view/view', $data);
 		}
 		else
 		{

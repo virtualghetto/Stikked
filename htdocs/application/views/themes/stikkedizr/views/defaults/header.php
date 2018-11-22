@@ -38,9 +38,27 @@ $this->carabiner->display('css');
 ?>
 	<script type="text/javascript">
 	//<![CDATA[
-	var base_url = '<?php echo base_url(); ?>';
-	//]]>
-	</script>
+var base_url = '<?php echo base_url(); ?>';
+//]]>
+</script>
+<?php
+
+//Javascript
+$this->carabiner->js('jquery.js');
+$this->carabiner->js('jquery.timers.js');
+$this->carabiner->js('lz-string-1.3.3-min.js');
+$this->carabiner->js('modernizr.js');
+$this->carabiner->js('stikked.js');
+$this->carabiner->js('crypto-js/rollups/aes.js');
+$this->carabiner->js('bootstrap.min.js');
+
+if(config_item('js_editor') == 'codemirror') {
+    $this->carabiner->js('codemirror/codemirror.js');
+}
+
+$this->carabiner->display('js');
+
+?>
 	</head>
 	<body>		
 		<header>

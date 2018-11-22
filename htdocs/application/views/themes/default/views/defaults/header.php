@@ -49,6 +49,29 @@ $searchparams = str_replace('"', '&quot;', $searchparams);
 	var base_url = '<?php echo base_url(); ?>';
 	//]]>
 	</script>
+<?php
+
+//Javascript
+$this->carabiner->js('filereader.js');
+$this->carabiner->js('jquery.js');
+$this->carabiner->js('jquery.timers.js');
+$this->carabiner->js('jquery-ui-selectable-combined.min.js');
+$this->carabiner->js('linkify-jquery.min.js');
+$this->carabiner->js('linkify.min.js');
+$this->carabiner->js('lz-string-1.3.3-min.js');
+$this->carabiner->js('stikked.js');
+$this->carabiner->js('crypto-js/rollups/aes.js');
+
+if(config_item('js_editor') == 'codemirror') {
+    $this->carabiner->js('codemirror/codemirror.js');
+}
+if(config_item('js_editor') == 'ace') {
+    $this->carabiner->js('ace/ace.js');
+}
+
+$this->carabiner->display('js');
+
+?>
 	</head>
 	<body>
 		<div id="container">

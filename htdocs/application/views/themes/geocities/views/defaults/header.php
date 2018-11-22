@@ -40,6 +40,22 @@ $this->carabiner->display('css');
 	var base_url = '<?php echo base_url(); ?>';
 	//]]>
 	</script>
+<?php
+
+//Javascript
+$this->carabiner->js('bootstrap.min.js');
+$this->carabiner->js('jquery.dataTables.min.js');
+$this->carabiner->js('jquery.js');
+$this->carabiner->js('jquery.timers.js');
+$this->carabiner->js('stikked.js');
+
+if(config_item('js_editor') == 'codemirror') {
+    $this->carabiner->js('codemirror/lib/codemirror.js');
+}
+
+$this->carabiner->display('js');
+
+?>
 	</head>
 	<body>		
 		<header>
