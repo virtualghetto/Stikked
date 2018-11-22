@@ -818,7 +818,7 @@ class Main extends CI_Controller
 		}
 	}
 	
-	priavate function _valid_recaptcha()
+	private function _valid_recaptcha()
 	{
 		
 		if ($this->recaptcha_privatekey == null || $this->recaptcha_privatekey == '')
