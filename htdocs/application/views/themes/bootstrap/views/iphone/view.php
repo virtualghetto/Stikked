@@ -1,6 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="info">
 	<h1 class="pagetitle"><?php echo $title; ?></h1>
 	<div class="meta">

@@ -1,6 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <?php
 
 //codemirror modes
@@ -18,7 +16,7 @@ $this->load->view('themes/' . config_item('theme') . '/views/defaults/stats');
 
 ?>
 <div><footer class="footer">
-	<?php echo lang('powered_by'); ?> <a href="https://github.com/claudehohl/Stikked">Stikked<!-- version <?php echo config_item('stikked_version'); ?> --></a>
+	Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo lang('powered_by'); ?> <a href="https://github.com/claudehohl/Stikked">Stikked<!-- version <?php echo config_item('stikked_version'); ?> --></a> <?php echo  (ENVIRONMENT === 'development') ?  '&amp; CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?>
 </footer></div>
 	</body>
 </html>
