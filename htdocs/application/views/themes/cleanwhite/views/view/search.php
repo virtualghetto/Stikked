@@ -1,10 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<form action="">
-    <div class="item_group searchgroup">
-        <div class="item">
-            <label for="search"><?php echo lang('paste_search'); ?>
-            </label>
-            <input type="text" name="search" value="<?php echo str_replace('"', '&quot;', $this->input->get('search')); ?>" id="search" maxlength="100" tabindex="1" />
-        </div>
+<form class="form-horizontal">
+    <div class="control-group searchgroup">
+      <div class="controls">
+        <input id="search" name="search" type="text" placeholder="search" class="input-medium" value="<?php echo $this->input->get('search'); ?>" />
+      </div>
     </div>
 </form>
