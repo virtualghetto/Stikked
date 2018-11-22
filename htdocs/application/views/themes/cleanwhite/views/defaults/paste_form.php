@@ -1,6 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <?php echo validation_errors(); ?>
 
 <div class="form_wrapper margin">
@@ -113,7 +111,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									"60" => lang('exp_1h'),
 									"1440" => lang('exp_1d'),
 									"10080" => lang('exp_1w'),
-									"40320" => lang('exp_4w'),
+									"40320" => lang('exp_1m'),
 									"483840" => lang('exp_1y'),
 								);
                             if(!config_item('disable_keep_forever')) {

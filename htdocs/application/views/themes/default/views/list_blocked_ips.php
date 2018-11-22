@@ -1,6 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <h1><a href="<?php echo site_url('spamadmin'); ?>">Spamadmin</a> - blacklist</h1>
 
 		<?php

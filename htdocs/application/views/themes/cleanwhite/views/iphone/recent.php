@@ -1,6 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 				<?php if(!empty($pastes)){
 					function checkNum($num){
 						return ($num%2) ? TRUE : FALSE;

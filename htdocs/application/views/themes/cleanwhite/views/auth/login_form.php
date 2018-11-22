@@ -1,8 +1,7 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php $this->load->view('themes/' . config_item('theme') . '/views/defaults/header'); ?>
     <?php
-        $message = $this->db_session->flashdata('login_error');
+        $message = $this->session->flashdata('login_error');
         if ($message){
             echo '<div class="login_error">';
             echo $message;
@@ -30,4 +29,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <?php echo form_close(); ?>
       <?php echo form_fieldset_close(); ?>
     </div>
-      
+
+<?php $this->load->view('themes/' . config_item('theme') . '/views/defaults/footer'); ?>

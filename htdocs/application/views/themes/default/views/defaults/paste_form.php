@@ -1,12 +1,10 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <?php echo validation_errors(); ?>
 
 <div class="form_wrapper margin">
 	<form action="<?php echo base_url(); ?>" method="post">
 
-		<h1><?php if(!isset($page['title'])){ ?>
+		<h1 id="reply"><?php if(!isset($page['title'])){ ?>
 			<?php echo lang('paste_create_new'); ?>
 		<?php } else { ?>
 			<?php echo $page['title']; ?>
@@ -91,9 +89,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$expire_extra = 'id="expire" class="select" tabindex="7"';
 					$options = array(
 									"burn" => lang('exp_burn'),
+									"5" => lang('exp_5min'),
 									"60" => lang('exp_1h'),
 									"1440" => lang('exp_1d'),
+									"10080" => lang('exp_1w'),
 									"40320" => lang('exp_1m'),
+									"483840" => lang('exp_1y'),
 								);
                     if(!config_item('disable_keep_forever')) {
                         $options['0'] = lang('exp_forever');

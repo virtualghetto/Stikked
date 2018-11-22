@@ -1,6 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <h1>Spamadmin</h1>
 <p><?php echo $total_spam_attempts; ?> spam-pastes repelled. <a href="<?php echo site_url('spamadmin/blacklist'); ?>">View blocked IPs</a>.</p>
 

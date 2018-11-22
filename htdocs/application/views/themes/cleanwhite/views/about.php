@@ -1,7 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="about">
 	<h1>About</h1>
 	<p>Stikked is an Open-Source PHP Pastebin, with the aim of keeping a simple and easy to use user interface.</p>
