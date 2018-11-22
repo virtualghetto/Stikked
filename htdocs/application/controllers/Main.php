@@ -390,12 +390,18 @@ class Main extends CI_Controller
 		if (!$this->input->post('submit'))
 		{
 			
+			$max_expiration = config_item('max_expiration');
 			if (!$this->session->userdata('expire'))
 			{
 				$default_expiration = config_item('default_expiration');
 				$this->session->set_userdata('expire', $default_expiration);
 			}
 			
+			if (($max_expiration > 0 ) && ($this->session->userdata('expire') == 0  || $this->session->userdata('expire') > $max_expiration ))
+			{
+				$this->session->set_userdata('expire', $max_expiration);
+			}
+
 			if (!$this->session->userdata('snipurl'))
 			{
 				$shorturl_selected = config_item('shorturl_selected');

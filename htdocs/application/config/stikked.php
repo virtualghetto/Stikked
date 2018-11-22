@@ -246,7 +246,7 @@ $config['spamadmin_user'] = '';
 $config['spamadmin_pass'] = '';
 
 /**
- * Default paste expiration time (minutes)
+ * Default and Maximum paste expiration time (minutes)
  *
  * Possible values:
  *  burn (burn on reading)
@@ -259,6 +259,7 @@ $config['spamadmin_pass'] = '';
  *  0 (keep forever)
 **/
 $config['default_expiration'] = 0;
+$config['max_expiration'] = 0;
 
 /**
  * Default language

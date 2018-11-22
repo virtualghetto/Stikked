@@ -100,6 +100,12 @@ class Api extends Main
 				$_POST['expire'] = config_item('default_expiration');
 			}
 
+			$max_expiration = config_item('max_expiration');
+			if (($max_expiration > 0 ) && ($_POST['expire'] == 0  || $_POST['expire'] > $max_expiration ))
+			{
+				$_POST['expire'] = $max_expiration;
+			}
+
 			//create paste
 			$paste_url = $this->pastes->createPaste();
 			$data['msg'] = base_url() . $paste_url;
