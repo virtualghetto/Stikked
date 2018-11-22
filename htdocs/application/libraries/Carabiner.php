@@ -256,6 +256,8 @@ class Carabiner {
 	private $js  = array('main'=>array());
 	private $css = array('main'=>array());
 	private $loaded = array();
+	private $_js_string = array();
+    private $_css_string = array();
 	
     private $CI;
 	
@@ -501,24 +503,34 @@ class Carabiner {
 			case 'JS':
 			case 'js':
 				$this->_display_js();
+                $this->_display_js_string();
 			break;
 			
 			case 'CSS':
 			case 'css':
 				$this->_display_css();
+                $this->_display_css_string();
 			break;
 			
 			case 'both':
 				$this->_display_js();
 				$this->_display_css();
+                $this->_display_js_string();
+                $this->_display_css_string();
 			break;
 			
 			default:
-				if( isset($this->js[$flag]) && ($group_filter == NULL || $group_filter == 'js') )
-					$this->_display_js($flag);
+				if( isset($this->js[$flag]) && ($group_filter == NULL || $group_filter == 'js') ){
+                                    $this->_display_js($flag);
+                                    $this->_display_js_string($flag);
+                                }
+					
 				
-				if( isset($this->css[$flag]) && ($group_filter == NULL || $group_filter == 'css') )
+				if( isset($this->css[$flag]) && ($group_filter == NULL || $group_filter == 'css') ){
 					$this->_display_css($flag);
+					$this->_display_css_string($flag);
+				}
+					
 			break;
 		}
 	}
@@ -856,23 +868,23 @@ class Carabiner {
 	{
 
 		$file_data = '';
-		
+
+		$suffix = $flag == 'js' ? ';' : '';		
 		$path = ($flag == 'css') ? $this->style_path : $this->script_path;
 		$minify = ($flag == 'css') ? $this->minify_css : $this->minify_js;
-		
-	
+
 		foreach($files as $file):
 			
 			$v = (isset($file['prod']) ) ? 'prod' : 'dev';
 			
 			if( (isset($file['minify']) && $file['minify'] == true) || (!isset($file['minify']) && $minify) ):
 				
-				$file_data .=  $this->_minify( $flag, $file['dev'] ) . "\n";
+				$file_data .= rtrim( $this->_minify( $flag, $file['dev'] ), $suffix ) . $suffix ."\n";
 				
 			else:
 			
 				$r = ( $this->isURL($file[$v]) ) ? $file[$v] : realpath($path.$file[$v]);
-				$file_data .=  $this->_get_contents( $r ) ."\n";
+				$file_data .=  rtrim( $this->_get_contents( $r ), $suffix ) . $suffix ."\n";
 				
 			endif;
 		
@@ -895,12 +907,6 @@ class Carabiner {
 		
 		$path = ($flag == 'css') ? $this->style_path : $this->script_path;
 		$ref  = ( $this->isURL($file_ref) ) ? $file_ref : realpath($path.$file_ref);
-
-        //hack for stikked themes
-        if(!file_exists($ref)){
-            $path = ($flag == 'css') ? 'themes/default/css/' : $this->script_path;
-            $ref  = ( $this->isURL($file_ref) ) ? $file_ref : realpath($path.$file_ref);
-        }
 
 		switch($flag){
 			
@@ -938,14 +944,16 @@ class Carabiner {
 	private function _get_contents($ref)
 	{
 
-		if( $this->isURL($ref) && ( ini_get('allow_url_fopen') == 0 || $this->force_curl ) ):
+        $abs_ref = ( substr($ref, 0, 2) == '//' ) ? ('http:' . $ref) : $ref;
+
+        if( $this->isURL($abs_ref) && ( ini_get('allow_url_fopen') == 0 || $this->force_curl ) ):
 
 			$this->_load('curl');
-			$contents = $this->CI->curl->simple_get($ref);
+			$contents = $this->CI->curl->simple_get($abs_ref);
 			
 		else:
 
-			$contents = file_get_contents( $ref );
+			$contents = file_get_contents( $abs_ref );
 			
 		endif;
 		
@@ -1100,6 +1108,100 @@ class Carabiner {
 			return TRUE;
 		endif;
 	}
+
+
+        /**
+         * function will accept string or array of javascripts and group name 
+         * as string
+         * @param mixed $string
+         * @param string $group
+         */
+        
+        public function js_string($string = NULL,$group='main'){
+            
+            $scripts = is_array($string)?$string:array($string);
+            
+            foreach ($scripts as $script){
+                if(strlen($script)){
+                    $this->_js_string[$group][] = $script;
+                }
+            }
+        }
+        
+        /**
+         * function will accept group name as string
+         * @param string $group
+         * @return empty if group not found
+         */
+        
+        private function _display_js_string($group='main'){
+            $script = '';
+            if(!empty($this->_js_string))
+            {
+                if( !isset($this->_js_string[$group]) ): // the group you asked for doesn't exist. This should never happen, but better to be safe than sorry.
+
+			log_message('error', "Carabiner: The JavaScript string group named '{$group}' does not exist.");
+			return;
+		
+		endif;
+                
+                $script = implode(';', $this->_js_string[$group]);
+                
+                if($this->minify_js && strlen($script)){
+                    $this->_load('jsmin');
+
+                    $script = $this->CI->jsmin->minify($script);
+                }
+                
+                echo '<script>'.$script.'</script>';
+            }
+        }
+        
+        /**
+         * function will accept string or array of styles and group name as string
+         * @param mixed $string
+         * @param string $group
+         */
+        
+        public function css_string($string = NULL,$group = 'main'){
+            
+            $styles = is_array($string)?$string:array($string);
+            
+            foreach ($styles as $style){
+                if(strlen($style)){
+                    $this->_css_string[$group][] = $style;
+                }
+            }
+        }
+        
+        /**
+         * function will accept group name as string
+         * @param string $group
+         * @return empty if group not found in css
+         */
+        
+        private function _display_css_string($group = 'main'){
+            $style = '';
+            if(!empty($this->_css_string))
+            {
+                
+                if( !isset($this->css[$group]) ): // the group you asked for doesn't exist. This should never happen, but better to be safe than sorry.
+
+			log_message('error', "Carabiner: The CSS string group named '{$group}' does not exist.");
+			return;
+		
+		endif;
+                
+                $style = implode('', $this->_css_string['main']);
+                
+                if($this->minify_css && strlen($style)){
+                    $this->_load('cssmin');
+                    $style = $this->CI->cssmin->minify($style);
+                }
+                
+                echo '<style type="text/css">'.$style.'</style>';
+            }
+        }
 	
 	
 	/**
@@ -1113,7 +1215,7 @@ class Carabiner {
 	*/
 	public static function isURL($string)
 	{
-		$pattern = '@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)@';
+		$pattern = '@(((https?|ftp):)?//([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)@';
 		return preg_match($pattern, $string);
 	}
 }

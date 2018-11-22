@@ -1,18 +1,4 @@
-<?php
-/**
- * Class and Function List:
- * Function list:
- * - __construct()
- * - index()
- * - login()
- * - logout()
- * - alpha_dash_dot()
- * Classes list:
- * - Auth extends CI_Controller
- */
-
-if (!defined('BASEPATH')) exit('No direct script access allowed');
-
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * This file is part of Auth_Ldap.
 
@@ -28,8 +14,9 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
     You should have received a copy of the GNU General Public License
     along with Auth_Ldap.  If not, see <http://www.gnu.org/licenses/>.
- *
-*/
+ * 
+ */
+
 /**
  * @author      Greg Wojtak <gwojtak@techrockdo.com>
  * @copyright   Copyright © 2010,2011 by Greg Wojtak <gwojtak@techrockdo.com>
@@ -37,90 +24,62 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
  * @subpackage  auth demo
  * @license     GNU Lesser General Public License
  */
+class Auth extends CI_Controller {
+    function __construct() {
+        parent::__construct();
 
-class Auth extends CI_Controller
-{
-	
-	function __construct()
-	{
-		parent::__construct();
-		$this->load->helper('form');
-		$this->load->library('Form_validation');
-		$this->load->library('auth_ldap');
-		$this->load->helper('url');
-		$this->load->library('table');
-	}
-	
-	function index()
-	{
-		$this->session->keep_flashdata('tried_to');
-		$this->login();
-	}
-	
-	function login($errorMsg = NULL)
-	{
-		$this->session->keep_flashdata('tried_to');
-		
-		if (!$this->auth_ldap->is_authenticated())
-		{
+        $this->load->helper('form');
+        $this->load->library('Form_validation');
+        $this->load->library('auth_ldap');
+        $this->load->helper('url');
+        $this->load->library('table');
+    }
 
-			// Set up rules for form validation
-			$rules = $this->form_validation;
-			$rules->set_rules('username', 'Username', 'required|callback_alpha_dash_dot');
-			$rules->set_rules('password', 'Password', 'required');
+    function index() {
+        $this->session->keep_flashdata('tried_to');
+        $this->login();
+    }
 
-			// Do the login...
-			
-			if ($rules->run() && $this->auth_ldap->login($rules->set_value('username') , $rules->set_value('password')))
-			{
+    function login($errorMsg = NULL){
+        $this->session->keep_flashdata('tried_to');
+        if(!$this->auth_ldap->is_authenticated()) {
+            // Set up rules for form validation
+            $rules = $this->form_validation;
+            $rules->set_rules('username', 'Username', 'required|alpha_dash');
+            $rules->set_rules('password', 'Password', 'required');
 
-				// Login WIN!
-				
-				if ($this->session->flashdata('tried_to'))
-				{
-					redirect($this->session->flashdata('tried_to'));
-				}
-				else
-				{
-					redirect('/');
-				}
-			}
-			else
-			{
+            // Do the login...
+            if($rules->run() && $this->auth_ldap->login(
+                    $rules->set_value('username'),
+                    $rules->set_value('password'))) {
+                // Login WIN!
+                if($this->session->flashdata('tried_to')) {
+                    redirect($this->session->flashdata('tried_to'));
+                }else {
+                    redirect('/portal/');
+                }
+            }else {
+                // Login FAIL
+                $this->load->view('auth/login_form', array('login_fail_msg'
+                                        => 'Error with LDAP authentication.'));
+            }
+        }else {
+                // Already logged in...
+                redirect('/portal/');
+        }
+    }
 
-				// Login FAIL
-				$this->session->set_flashdata('login_error', 'Incorrect username or password.');
-				$this->load->view('themes/' . config_item('theme') . '/views/auth/login_form');
-			}
-		}
-		else
-		{
-
-			// Already logged in...
-			redirect('/');
-		}
-	}
-	
-	function logout()
-	{
-		
-		if ($this->session->userdata('logged_in'))
-		{
-			$data['name'] = $this->session->userdata('cn');
-			$data['username'] = $this->session->userdata('username');
-			$data['logged_in'] = TRUE;
-			$this->auth_ldap->logout();
-		}
-		else
-		{
-			$data['logged_in'] = FALSE;
-		}
-		redirect('/');
-	}
-
-	public function alpha_dash_dot($str)
-	{
-		return (!preg_match("/^([-a-z0-9_\-\.])+$/i", $str)) ? FALSE : TRUE;
-	}
+    function logout() {
+        if($this->session->userdata('logged_in')) {
+            $data['name'] = $this->session->userdata('cn');
+            $data['username'] = $this->session->userdata('username');
+            $data['logged_in'] = TRUE;
+            $this->auth_ldap->logout();
+        } else {
+            $data['logged_in'] = FALSE;
+        }
+            $this->load->view('auth/logout_view', $data);
+    }
 }
+
 ?>
