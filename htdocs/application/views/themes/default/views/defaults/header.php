@@ -35,6 +35,7 @@ $this->carabiner->css('main.css');
 $this->carabiner->css('print.css', 'print');
 $this->carabiner->css('codemirror.css');
 $this->carabiner->css('diff.css');
+$this->carabiner->css('table.diff.css');
 
 $this->carabiner->display('css'); 
 

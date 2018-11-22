@@ -31,6 +31,7 @@ $this->carabiner->css('bootstrap.css');
 $this->carabiner->css('bootstrap-responsive.css');
 $this->carabiner->css('style.css');
 $this->carabiner->css('codemirror.css');
+$this->carabiner->css('table.diff.css');
 
 $this->carabiner->display('css'); 
 

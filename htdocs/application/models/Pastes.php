@@ -586,10 +586,11 @@ class Pastes extends CI_Model
 						$diff=new Diff($a2,$a1, 1);
 						$data['paste'] = $diff->output;
 
-						//echo "<table cellpadding=\"0\" cellspacing=\"0\" class=\"diff\">";
-						//echo "<tr><td></td><td></td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td></td></tr>";
-						//echo $diff->output;
-						//echo "</table>";
+						$data['paste'] = '<table cellpadding="0" cellspacing="0" class="diff">';
+						$data['paste'] = $data['paste'] . '<tr><td></td><td></td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td></td></tr>';
+						$data['paste'] = $data['paste'] . $diff->output;
+						$data['paste'] = $data['paste'] . '</table>';
+						$data['paste'] =  htmlspecialchars_decode($data['paste']);
 
 
 					}

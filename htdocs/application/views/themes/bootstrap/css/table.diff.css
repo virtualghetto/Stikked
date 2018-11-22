@@ -1,0 +1,42 @@
+table.diff
+{
+        background:white;
+}
+
+table.diff td
+{
+        text-align:right;
+        padding-left:3px;
+        padding-right:3px;
+        font-size:8pt;
+}
+
+table.diff td.code
+{
+        text-align:left;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: normal;
+}
+
+table.diff td.code pre
+{
+        margin:0;
+        padding:0;
+}
+
+table.diff tr.new
+{
+        background:#ddddff;
+}
+table.diff tr.old
+{
+        background:#ffdddd;
+}
+table.diff tr.hidenew
+{
+        display:none;
+}
+table.diff tr.hideold
+{
+        display:none;
+}
