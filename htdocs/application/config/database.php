@@ -81,7 +81,7 @@ $db['default'] = array(
 	'username' => $CI->config->item('db_username'),
 	'password' => $CI->config->item('db_password'),
 	'database' => $CI->config->item('db_database'),
-	'dbdriver' => 'mysqli',
+	'dbdriver' => $CI->config->item('db_driver'),
 	'dbprefix' => $CI->config->item('db_prefix'),
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),

@@ -28,6 +28,7 @@ $config['db_hostname'] = '127.0.0.1';
 $config['db_database'] = 'stikked';
 $config['db_username'] = 'stikked';
 $config['db_password'] = 'stikked';
+$config['db_driver'] = 'mysqli';
 
 // If you are using sqlite:
 // uncomment the configuration lines below.
