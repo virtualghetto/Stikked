@@ -1,4 +1,6 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 /**
  * Class and Function List:
  * Function list:
@@ -14,7 +16,7 @@
 class Spamadmin extends CI_Controller
 {
 	
-	function __construct() 
+	public function __construct()
 	{
 		parent::__construct();
 
@@ -40,7 +42,7 @@ class Spamadmin extends CI_Controller
 			$_SERVER['PHP_AUTH_PW'] = "";
 		}
 		
-		if ($user === '' || $pass === '' || $_SERVER['PHP_AUTH_USER'] !== $user || $_SERVER['PHP_AUTH_PW'] !== $pass) 
+		if ($user === '' || $pass === '' || $_SERVER['PHP_AUTH_USER'] !== $user || $_SERVER['PHP_AUTH_PW'] !== $pass)
 		{
 			header('WWW-Authenticate: Basic realm="Spamadmin"');
 			header('HTTP/1.0 401 Unauthorized');
@@ -48,14 +50,14 @@ class Spamadmin extends CI_Controller
 		}
 	}
 	
-	function index() 
+	public function index()
 	{
 		$this->load->model('pastes');
 		$pastes_to_delete = $this->input->post('pastes_to_delete');
 		
-		if ($pastes_to_delete) 
+		if ($pastes_to_delete)
 		{
-			foreach (explode(' ', $pastes_to_delete) as $pid) 
+			foreach (explode(' ', $pastes_to_delete) as $pid)
 			{
 				$this->db->where('pid', $pid);
 				$this->db->delete('pastes');
@@ -65,27 +67,27 @@ class Spamadmin extends CI_Controller
 
 		//render view
 		$data = $this->pastes->getSpamLists();
-		$this->load->view('list_ips', $data);
+		_view('list_ips', $data);
 	}
 	
-	function spam_detail() 
+	public function spam_detail()
 	{
 		$this->load->model('pastes');
 		$ip_address = $this->uri->segment(2);
 		
-		if ($this->input->post('confirm_remove') && $ip_address != '') 
+		if ($this->input->post('confirm_remove') && $ip_address != '')
 		{
 			$this->db->where('ip_address', $ip_address);
 			$this->db->delete('pastes');
 			$paste_count = $this->db->affected_rows();
 			
-			if ($this->input->post('block_ip')) 
+			if ($this->input->post('block_ip'))
 			{
 				$query = $this->db->get_where('blocked_ips', array(
 					'ip_address' => $ip_address
 				));
 				
-				if ($query->num_rows() == 0) 
+				if ($query->num_rows() == 0)
 				{
 					$this->db->insert('blocked_ips', array(
 						'ip_address' => $ip_address,
@@ -101,7 +103,7 @@ class Spamadmin extends CI_Controller
 		$data['ip_address'] = $ip_address;
 		$ip = explode('.', $ip_address);
 		
-		if (count($ip) > 1) 
+		if (count($ip) > 1)
 		{
 			$ip_firstpart = $ip[0] . '.' . $ip[1] . '.';
 			$data['ip_range'] = $ip_firstpart . '*.*';
@@ -116,10 +118,10 @@ class Spamadmin extends CI_Controller
 		}
 
 		//view
-		$this->load->view('spam_detail', $data);
+		_view('spam_detail', $data);
 	}
 	
-	function blacklist() 
+	public function blacklist()
 	{
 
 		//pagination
@@ -146,14 +148,22 @@ class Spamadmin extends CI_Controller
 		$data['pages'] = $this->pagination->create_links();
 
 		//view
-		$this->load->view('list_blocked_ips', $data);
+		_view('list_blocked_ips', $data);
 	}
 	
-	function unblock_ip() 
+	public function unblock_ip()
 	{
 		$ip_address = $this->uri->segment(4);
 		$this->db->where('ip_address', $ip_address);
 		$this->db->delete('blocked_ips');
 		redirect('spamadmin/blacklist');
+	}
+
+	private function _view($v,$d)
+	{
+		$this->theme = config_item('theme');
+		$this->load->view('themes/' . $this->theme . '/views/defaults/header');
+		$this->load->view('themes/' . $this->theme . '/views/' . $v, $d);
+		$this->load->view('themes/' . $this->theme . '/views/defaults/footer');
 	}
 }

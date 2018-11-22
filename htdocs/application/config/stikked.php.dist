@@ -1,4 +1,5 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Site Name
@@ -246,7 +247,7 @@ $config['spamadmin_user'] = '';
 $config['spamadmin_pass'] = '';
 
 /**
- * Default paste expiration time (minutes)
+ * Default and Maximum paste expiration time (minutes)
  *
  * Possible values:
  *  burn (burn on reading)
@@ -259,6 +260,7 @@ $config['spamadmin_pass'] = '';
  *  0 (keep forever)
 **/
 $config['default_expiration'] = 0;
+$config['max_expiration'] = 0;
 
 /**
  * Default language
@@ -356,3 +358,59 @@ $config['expires'] = array('expire', 'perish', 'go to its last resting place',
 'kick the bucket', 'croak', 'bite the big one', 'check out', 'buy the farm',
 'join the choir invisible', 'shuffle off the mortal coil', 'hop the perch',
 'run down the curtain', 'die', 'self destruct', 'explode');
+
+/*
+|--------------------------------------------------------------------------
+| Session Variables
+|--------------------------------------------------------------------------
+|
+| 'sess_driver'
+|
+|	The storage driver to use: files, database, redis, memcached
+|
+| 'sess_cookie_name'
+|
+|	The session cookie name, must contain only [0-9a-z_-] characters
+|
+| 'sess_expiration'
+|
+|	The number of SECONDS you want the session to last.
+|	Setting to 0 (zero) means expire when the browser is closed.
+|
+| 'sess_save_path'
+|
+|	The location to save sessions to, driver dependent.
+|
+|	For the 'files' driver, it's a path to a writable directory.
+|	WARNING: Only absolute paths are supported!
+|
+|	For the 'database' driver, it's a table name.
+|	Please read up the manual for the format with other session drivers.
+|
+|	IMPORTANT: You are REQUIRED to set a valid save path!
+|
+*/
+
+$config['sess_driver'] = 'database';
+$config['sess_cookie_name'] = 'stikked';
+$config['sess_expiration'] = 60*60*24*1;
+$config['sess_save_path'] = 'sessions';
+
+/*
+|--------------------------------------------------------------------------
+| Stikked version
+|--------------------------------------------------------------------------
+*/
+
+$config['stikked_version'] = '0.13.0';
+
+/*
+|--------------------------------------------------------------------------
+| Favorite Languages
+|--------------------------------------------------------------------------
+|
+| The favorite languages, that's at the beginning of the list.
+*/
+
+$config['favorite_languages'] = array('bash', 'c', 'cpp', 'css', 'diff', 'erlang', 'go', 'html5', 'java',
+		'javascript', 'latex', 'lua', 'perl', 'php', 'python', 'ruby', 'rust', 'sql', 'text', 'xml',);

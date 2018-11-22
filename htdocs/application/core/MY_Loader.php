@@ -1,4 +1,6 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 /**
  * Class and Function List:
  * Function list:
@@ -9,31 +11,29 @@
  * - MY_Loader extends CI_Loader
  */
 
-if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 class MY_Loader extends CI_Loader
 {
 	
-	function __construct() 
+	public function __construct() 
 	{
 		parent::__construct();
 		log_message('debug', 'MY_Loader Class Initialized');
 	}
 	
-	function view($view, $vars = array() , $return = FALSE) 
+	public function view($view, $vars = array() , $return = FALSE) 
 	{
 
 		//theme name
 		$theme = config_item('theme');
 
 		//view path
-		$view_path = 'themes/' . $theme . '/views/' . $view . '.php';
+		$view_path = 'application/views/themes/' . $theme . '/views/' . $view . '.php';
 
 		//fallback to default view if view in theme not found
 		
 		if (!file_exists($view_path)) 
 		{
-			$view_path = 'themes/default/views/' . $view . '.php';
+			$view_path = 'application/views/themes/default/views/' . $view . '.php';
 		}
 
 		//return
@@ -59,8 +59,8 @@ class MY_Loader extends CI_Loader
 	 * @param	array	$_ci_data	Data to load
 	 * @return	object
 	 */
-	protected 
-	function _ci_load($_ci_data) 
+
+	protected function _ci_load($_ci_data) 
 	{
 
 		// Set the default data variables

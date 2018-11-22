@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['paste_create_new'] = 'Create a new paste';
 $lang['paste_create_new_desc'] = 'Here you can create a new paste';

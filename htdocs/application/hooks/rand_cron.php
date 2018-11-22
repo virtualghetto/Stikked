@@ -1,11 +1,12 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 /**
  * Class and Function List:
  * Function list:
  * - rand_cron()
  * Classes list:
  */
-defined('BASEPATH') OR exit('No direct script access allowed.');
 /**
  * Calls cron randomly.
  *

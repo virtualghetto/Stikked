@@ -1,4 +1,6 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 /**
  * Class and Function List:
  * Function list:
@@ -11,7 +13,7 @@
 class Backup extends CI_Controller
 {
 	
-	function __construct() 
+	public function __construct()
 	{
 		parent::__construct();
 
@@ -19,7 +21,7 @@ class Backup extends CI_Controller
 		$user = $this->config->item('backup_user');
 		$pass = $this->config->item('backup_pass');
 		
-		if ($user == '' || $pass == '' || !isset($_SERVER['PHP_AUTH_USER']) || $_SERVER['PHP_AUTH_USER'] != $user || $_SERVER['PHP_AUTH_PW'] != $pass) 
+		if ($user == '' || $pass == '' || !isset($_SERVER['PHP_AUTH_USER']) || $_SERVER['PHP_AUTH_USER'] != $user || $_SERVER['PHP_AUTH_PW'] != $pass)
 		{
 			header('WWW-Authenticate: Basic realm="Backup"');
 			header('HTTP/1.0 401 Unauthorized');
@@ -27,7 +29,7 @@ class Backup extends CI_Controller
 		}
 	}
 	
-	function index() 
+	public function index()
 	{
 
 		// Load the DB utility class
