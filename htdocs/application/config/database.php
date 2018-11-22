@@ -1,5 +1,6 @@
 <?php
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 /*
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
@@ -46,7 +47,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 |				'ssl_key'    - Path to the private key file
 |				'ssl_cert'   - Path to the public key certificate file
 |				'ssl_ca'     - Path to the certificate authority file
-|				'ssl_capath' - Path to a directory containing trusted CA certificats in PEM format
+|				'ssl_capath' - Path to a directory containing trusted CA certificates in PEM format
 |				'ssl_cipher' - List of *allowed* ciphers to be used for the encryption, separated by colons (':')
 |				'ssl_verify' - TRUE/FALSE; Whether verify the server certificate or not ('mysqli' only)
 |
@@ -69,41 +70,27 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
-
 $active_group = 'default';
 $query_builder = TRUE;
-$CI = & get_instance();
 
-if ($CI->config->item('db_driver') == 'sqlite') 
-{
-	$db['default']['database'] = $CI->config->item('db_database') . '.db';
-	$db['default']['dbdriver'] = 'sqlite3';
-}
-else
-{
-	$db['default']['hostname'] = $CI->config->item('db_hostname');
-	$db['default']['username'] = $CI->config->item('db_username');
-	$db['default']['password'] = $CI->config->item('db_password');
-	$db['default']['database'] = $CI->config->item('db_database');
-	if (null !== $CI->config->item('db_driver'))
-	{
-		$db['default']['dbdriver'] = $CI->config->item('db_driver');
-	}
-	else
-	{
-		$db['default']['dbdriver'] = 'mysqli';
-	}
-}
-$db['default']['dbprefix'] = $CI->config->item('db_prefix');
-$db['default']['pconnect'] = FALSE;
-$db['default']['db_debug'] = TRUE;
-$db['default']['cache_on'] = FALSE;
-$db['default']['cachedir'] = '';
-$db['default']['char_set'] = 'utf8';
-$db['default']['dbcollat'] = 'utf8_general_ci';
-$db['default']['swap_pre'] = '';
-$db['default']['autoinit'] = TRUE;
-$db['default']['stricton'] = FALSE;
-
-/* End of file database.php */
-/* Location: ./application/config/database.php */
+$db['default'] = array(
+	'dsn'	=> '',
+	'hostname' => 'localhost',
+	'username' => '',
+	'password' => '',
+	'database' => '',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
