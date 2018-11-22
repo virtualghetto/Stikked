@@ -72,6 +72,7 @@ $route['lists/:num'] = 'main/lists/$1';
 $route['trends'] = 'main/trends';
 $route['trends/:any'] = 'main/trends/$1';
 $route['spamadmin/:num'] = 'spamadmin/index';
+$route['spamadmin/del/:num'] = 'spamadmin/del';
 $route['spamadmin/blacklist'] = 'spamadmin/blacklist';
 $route['spamadmin/blacklist/(:num)'] = 'spamadmin/blacklist';
 $route['spamadmin/blacklist/unblock/(:any)'] = 'spamadmin/unblock_ip';
