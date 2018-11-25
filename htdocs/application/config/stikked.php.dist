@@ -52,7 +52,7 @@ $config['db_prefix'] = '';
  * Currently: default, bootstrap, gabdark, gabdark3, geocities, snowkat, stikkedizr, cleanwhite, i386
  *
 */
-$config['theme'] = 'default';
+$config['theme'] = 'cleanwhite';
 
 /**
  * Display QR code

@@ -27,7 +27,7 @@ if(isset($insert)){
 
 			</span><?php }?>
 			<div class="spacer"></div>
-			By: <?=$name?> | <?php $p = explode(',', timespan($created, time())); echo sprintf($this->lang->line('paste_ago'),$p[0]); ?> | Syntax: <?=$lang?> | Views: <?php echo number_format($hits, 0, '.', "'"); ?>
+			By: <?=$name?> | <?php $p = explode(',', timespan($created, time())); echo sprintf($this->lang->line('paste_ago'),$p[0]); ?><?php if($expire > 0){?> | Expires: <?php echo timespan(time(), $expire, 1); ?><?php } ?> | Syntax: <?=$lang?> | Views: <?php echo number_format($hits, 0, '.', "'"); ?>
 			<div class="spacer"></div>
 			<span class="detail"><span class="item">URL </span><a href="<?=$url?>" style="color: #858585;text-decoration: none;"><?=$url?></a></span>
 			
