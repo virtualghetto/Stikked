@@ -943,7 +943,7 @@ class Pastes extends CI_Model
 		$this->load->library('process');
 		$amount = $this->config->item('per_page');
 		$page = ($this->uri->segment($seg) ? $this->uri->segment($seg) : 0);
-		$this->db->select('id, title, name, created, pid, lang, ip_address');
+		$this->db->select('id, title, name, created, pid, lang, ip_address, expire');
 		$this->db->where('private', 0);
 		
 		if ($ip_address) 
@@ -965,6 +965,7 @@ class Pastes extends CI_Model
 				$data['pastes'][$n]['lang'] = $row['lang'];
 				$data['pastes'][$n]['pid'] = $row['pid'];
 				$data['pastes'][$n]['ip_address'] = $row['ip_address'];
+				$data['pastes'][$n]['expire'] = $row['expire'];
 				$n++;
 			}
 		}
