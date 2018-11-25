@@ -197,7 +197,7 @@ class Api extends Main
 			die("Invalid API key\n");
 		}
 		
-		if (config_item('private_only'))
+		if (!config_item('trends_enabled') || config_item('private_only'))
 		{
 			show_404();
 		}

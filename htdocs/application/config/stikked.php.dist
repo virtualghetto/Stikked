@@ -63,6 +63,14 @@ $config['theme'] = 'cleanwhite';
 $config['qr_enabled'] = FALSE;
 
 /**
+ * Display Trending
+ *
+ * Whether or not to display /trends
+ *
+*/
+$config['trends_enabled'] = FALSE;
+
+/**
  * JavaScript-Editor
  *
  * Which editor to use

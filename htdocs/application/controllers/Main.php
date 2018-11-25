@@ -676,7 +676,7 @@ class Main extends CI_Controller
 	{
 		$this->_valid_authentication();
 		
-		if (config_item('private_only'))
+		if (!config_item('trends_enabled') || config_item('private_only'))
 		{
 			show_404();
 		}
