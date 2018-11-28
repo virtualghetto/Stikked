@@ -391,19 +391,12 @@ class Main extends CI_Controller
 		
 		if (!$this->input->post('submit'))
 		{
-			
-			$max_expiration = config_item('max_expiration');
 			if (!$this->session->userdata('expire'))
 			{
 				$default_expiration = config_item('default_expiration');
 				$this->session->set_userdata('expire', $default_expiration);
 			}
 			
-			if (($max_expiration > 0 ) && ($this->session->userdata('expire') == 0  || $this->session->userdata('expire') > $max_expiration ))
-			{
-				$this->session->set_userdata('expire', $max_expiration);
-			}
-
 			if (!$this->session->userdata('snipurl'))
 			{
 				$shorturl_selected = config_item('shorturl_selected');
@@ -497,7 +490,7 @@ class Main extends CI_Controller
 			$this->form_validation->set_message('min_length', lang('empty'));
 			$this->form_validation->set_error_delimiters('<div class="message error"><div class="container">', '</div></div>');
 			
-			if ($this->form_validation->run() == FALSE)
+			if ($this->form_validation->run() === FALSE)
 			{
 				$data = $this->_form_prep();
 				$this->_view('defaults/paste_form', $data);
@@ -505,6 +498,12 @@ class Main extends CI_Controller
 			else
 			{
 				
+				$max_expiration = config_item('max_expiration');
+				if (($max_expiration > 0 ) && ($this->input->post('expire') == 0  || $this->input->post('expire') > $max_expiration ))
+				{
+					$_POST['expire'] = $max_expiration;
+				}
+
 				if (config_item('private_only'))
 				{
 					$_POST['private'] = 1;
