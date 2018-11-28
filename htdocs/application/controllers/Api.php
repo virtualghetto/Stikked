@@ -103,9 +103,11 @@ class Api extends Main
 			}
 
 			$max_expiration = config_item('max_expiration');
-			if (($max_expiration > 0 ) && ($_POST['expire'] == 0  || $_POST['expire'] > $max_expiration ))
+			if (($max_expiration > 0 ) &&
+				($_POST['expire'] == 0  || $_POST['expire'] > $max_expiration ))
 			{
-				$_POST['expire'] = $max_expiration;
+				$default_expiration = config_item('default_expiration');
+				$_POST['expire'] = $default_expiration;
 			}
 
 			//create paste

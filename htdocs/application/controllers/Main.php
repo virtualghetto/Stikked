@@ -499,9 +499,11 @@ class Main extends CI_Controller
 			{
 				
 				$max_expiration = config_item('max_expiration');
-				if (($max_expiration > 0 ) && ($this->input->post('expire') == 0  || $this->input->post('expire') > $max_expiration ))
+				if (($max_expiration > 0 ) &&
+					($this->input->post('expire') == 0  || $this->input->post('expire') > $max_expiration ))
 				{
-					$_POST['expire'] = $max_expiration;
+					$default_expiration = config_item('default_expiration');
+					$_POST['expire'] = $default_expiration;
 				}
 
 				if (config_item('private_only'))
@@ -539,6 +541,22 @@ class Main extends CI_Controller
 			$this->load->model('pastes');
 			$_POST['private'] = 1;
 			$_POST['snipurl'] = 0;
+
+			$max_expiration = config_item('max_expiration');
+			if (isset($_POST['expire'])) {
+				if (($max_expiration > 0 ) &&
+					($_POST['expire'] == 0  || $_POST['expire'] > $max_expiration ))
+				{
+					$default_expiration = config_item('default_expiration');
+					$_POST['expire'] = $default_expiration;
+				}
+			}
+			else
+			{
+				$default_expiration = config_item('default_expiration');
+				$_POST['expire'] = $default_expiration;
+			}
+
 			$ret_url = $this->pastes->createPaste();
 			echo $ret_url;
 		}
