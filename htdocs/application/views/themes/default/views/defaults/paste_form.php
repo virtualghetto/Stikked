@@ -49,7 +49,7 @@
 		</div>
 
 		<div class="item_group">
-			<div class="item">
+			<div class="item" <?php if($this->config->item('disable_shorturl')) { ?> style="display:none;" <?php } ?> >
 				<label for="snipurl"><?php echo lang('paste_create_shorturl'); ?>
 					<span class="instruction"><?php echo lang('paste_shorturl_desc'); ?></span>
 				</label>
