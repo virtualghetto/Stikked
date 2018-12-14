@@ -89,6 +89,26 @@ class Spamadmin extends CI_Controller
 		$this->_view('list_ips', $data);
 	}
 
+	public function expire($dpid, $exp = NULL)
+	{
+		$this->load->model('pastes');
+		$pastes_to_expire = $dpid;
+		$exp = is_int($exp) ? $exp : time() + 86400;
+
+		if ($pastes_to_expire)
+		{
+			foreach (explode(' ', $pastes_to_expire) as $pid)
+			{
+				$this->db->where('pid', $pid);
+				$this->db->update('pastes', array('expire' => $exp ,));
+			}
+		}
+
+		//render view
+		$data = $this->pastes->getSpamLists();
+		$this->_view('list_ips', $data);
+	}
+
 	public function spam_detail()
 	{
 		$this->load->model('pastes');
