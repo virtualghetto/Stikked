@@ -14,7 +14,7 @@ $theme = $this->config->item('theme');
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title><?php echo $page_title; ?></title>
-		<link rel="shortcut icon" href="<?php echo base_url() . 'favicon.ico'; ?>" />
+		<link rel="shortcut icon" href="<?php echo site_url() .'/' . 'favicon.ico'; ?>" />
 <?php
 
 //Carabiner
@@ -22,7 +22,7 @@ $this->carabiner->config(array(
     'script_dir' => 'themes/default/js/',
     'style_dir'  => 'themes/' . $theme . '/css/',
     'cache_dir'  => 'static/asset/',
-    'base_uri'	 => $this->config->item('base_url'),
+    'base_uri'	 => $this->config->item('base_url') . $this->config->item('index_page') . '/',
     'combine'	 => true,
     'dev'		 => !$this->config->item('combine_assets'),
 ));
@@ -44,7 +44,7 @@ $searchparams = str_replace('"', '&quot;', $searchparams);
 ?>
 	<script type="text/javascript">
 	//<![CDATA[
-	var base_url = '<?php echo base_url(); ?>';
+	var base_url = '<?php echo site_url() . '/'; ?>';
 	//]]>
 	</script>
 <?php
@@ -71,10 +71,10 @@ $this->carabiner->display('js');
 		<div id="container">
 			<div class="container">			
 				<div class="header">
-					<h1><a href="<?php echo base_url(); ?>" class="title"><?php echo $this->config->item('site_name'); ?></a></h1>
+					<h1><a href="<?php echo site_url(); ?>" class="title"><?php echo $this->config->item('site_name'); ?></a></h1>
 					<ul class="tabs">
 						<?php $l = $this->uri->segment(1)?>
-						<li><a <?php if($l == ""){ echo 'class="active"'; }?> href="<?php echo base_url(); ?>" title="<?php echo lang('menu_create_title'); ?>"><?php echo lang('menu_create'); ?></a></li>
+						<li><a <?php if($l == ""){ echo 'class="active"'; }?> href="<?php echo site_url(); ?>" title="<?php echo lang('menu_create_title'); ?>"><?php echo lang('menu_create'); ?></a></li>
 <?php if(! $this->config->item('private_only')){ ?>
 						<li><a <?php if($l == "lists"){ echo 'class="active"'; }?> href="<?php echo site_url('lists') . $searchparams; ?>" title="<?php echo lang('menu_recent_title'); ?>"><?php echo lang('menu_recent'); ?></a></li>
 <?php if($this->config->item('trends_enabled')){ ?>

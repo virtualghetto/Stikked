@@ -2,7 +2,7 @@
 <?php echo validation_errors(); ?>
 
 <div class="form_wrapper margin">
-	<?php echo form_open(base_url()); ?>
+	<?php echo form_open(site_url()); ?>
 
 		<h1 id="reply"><?php if(!isset($page['title'])){ ?>
 			<?php echo lang('paste_create_new'); ?>

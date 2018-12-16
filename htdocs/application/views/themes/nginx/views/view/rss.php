@@ -12,7 +12,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
     <title><?php echo $page_title; ?></title>
     <description><?php echo $page_title; ?></description>
     <atom:link href="<?php echo $feed_url; ?>" rel="self" type="application/rss+xml" />
-    <link><?php echo base_url(); ?></link>
+    <link><?php echo site_url(); ?></link>
     <language>en</language>
 <?php foreach($replies as $paste): ?>
 <item>
