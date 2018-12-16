@@ -45,11 +45,11 @@ if(isset($insert)){
 
 <ul class="actions">
 	<div class="container">
-		<li><a href="<?=site_url("view/download/".$pid)?>"><img src="<?=site_url("themes/nginx/images/download.png")?>" alt="disk" class="icon"/>Download Paste</a></li> 
-		<li><a href="#reply"><img src="<?=site_url("themes/nginx/images/reply.png")?>" alt="speech bubble" class="icon"/>Reply to this paste</a></li>
-		<li><a href="<?=site_url("view/raw/".$pid)?>"><img src="<?=site_url("themes/nginx/images/raw.png")?>" alt="blank document" class="icon"/>View Raw</a></li>
-		<li><a href="<?=site_url("view/embed/".$pid)?>"><img src="<?=site_url("themes/nginx/images/expand.png")?>" alt="blank document" class="icon"/>Embed</a></li>
-		<li><a href="<?=site_url("iphone/view/".$pid)?>"><img src="<?=site_url("themes/nginx/images/expand.png")?>" alt="blank document" class="icon"/>Mobile</a></li>
+		<li><a href="<?=site_url("view/download/".$pid)?>"><img src="<?=site_url("themes/" . $this->config->item('theme') . "/images/download.png")?>" alt="disk" class="icon"/>Download Paste</a></li>
+		<li><a href="#reply"><img src="<?=site_url("themes/" . $this->config->item('theme') . "/images/reply.png")?>" alt="speech bubble" class="icon"/>Reply to this paste</a></li>
+		<li><a href="<?=site_url("view/raw/".$pid)?>"><img src="<?=site_url("themes/" . $this->config->item('theme') . "/images/raw.png")?>" alt="blank document" class="icon"/>View Raw</a></li>
+		<li><a href="<?=site_url("view/embed/".$pid)?>"><img src="<?=site_url("themes/" . $this->config->item('theme') . "/images/expand.png")?>" alt="blank document" class="icon"/>Embed</a></li>
+		<li><a href="<?=site_url("iphone/view/".$pid)?>"><img src="<?=site_url("themes/" . $this->config->item('theme') . "/images/expand.png")?>" alt="blank document" class="icon"/>Mobile</a></li>
 	</div>
 </ul>
 
@@ -115,7 +115,7 @@ if(isset($insert)){
 		<?php 
 			$reply_form['page']['title'] = lang('paste_replyto') . ' "' . $title . '"';
 			$reply_form['page']['instructions'] = lang('paste_replyto_desc');
-		$this->load->view('themes/' . config_item('theme') . '/views/defaults/paste_form', $reply_form); ?>
+		$this->load->view('themes/' .  $this->config->item('theme') . '/views/defaults/paste_form', $reply_form); ?>
 	</div>
 
 </div>

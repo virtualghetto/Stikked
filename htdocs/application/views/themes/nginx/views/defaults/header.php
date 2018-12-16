@@ -14,13 +14,13 @@ $theme = $this->config->item('theme');
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title><?php echo $page_title; ?></title>
-		<link rel="shortcut icon" href="<?php echo site_url() .'/' . 'favicon.ico'; ?>" />
+		<link rel="shortcut icon" href="<?php echo base_url() . 'favicon.ico'; ?>" />
 <?php
 
 //Carabiner
 $this->carabiner->config(array(
-    'script_dir' => 'themes/default/js/',
-    'style_dir'  => 'themes/' . $theme . '/css/',
+    'script_dir' => 'themes/' . $this->config->item('theme'). '/js/',
+    'style_dir'  => 'themes/' . $this->config->item('theme'). '/css/',
     'cache_dir'  => 'static/asset/',
     'base_uri'	 => $this->config->item('base_url') . $this->config->item('index_page') . '/',
     'combine'	 => true,
@@ -58,7 +58,7 @@ $this->carabiner->js('jquery.js');
 $this->carabiner->js('linkify-jquery.min.js');
 
 
-if(config_item('js_editor') == 'codemirror') {
+if($this->config->item('js_editor') == 'codemirror') {
 	$this->carabiner->js('codemirror_exec.js');
 	$this->carabiner->js('codemirror/codemirror.js');
 }

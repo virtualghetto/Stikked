@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<?php $this->load->view('themes/' . config_item('theme') . '/views/defaults/header'); ?>
+<?php $this->load->view('themes/' . $this->config->item('theme') . '/views/defaults/header'); ?>
     <?php
         $message = $this->session->flashdata('login_error');
         if ($message){
@@ -30,4 +30,4 @@
       <?php echo form_fieldset_close(); ?>
     </div>
 
-<?php $this->load->view('themes/' . config_item('theme') . '/views/defaults/footer'); ?>
+<?php $this->load->view('themes/' . $this->config->item('theme') . '/views/defaults/footer'); ?>

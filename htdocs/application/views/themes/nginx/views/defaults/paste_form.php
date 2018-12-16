@@ -114,7 +114,7 @@
 									"40320" => lang('exp_1m'),
 									"483840" => lang('exp_1y'),
 								);
-                            if(!config_item('disable_keep_forever')) {
+                            if(!$this->config->item('disable_keep_forever')) {
                                 $options['0'] = lang('exp_forever');
                             }
 
