@@ -12,7 +12,7 @@
 							}
 					?>
 						<li class="<?php echo $eo; ?>">
-							<span class="title"><a href="<?php echo site_url() . '/'; ?>iphone/view/<?php echo $paste['pid']; ?>"><?php echo $paste['title']; ?></a></span>
+							<span class="title"><a href="<?php echo site_url('iphone/view/' . $paste['pid']); ?>"><?php echo $paste['title']; ?></a></span>
 							<span class="author"><?php echo $paste['name']; ?></span>
 						</li>
 						<?php }?>

@@ -2,7 +2,7 @@
 <?php echo validation_errors(); ?>
 
 <div class="form_wrapper margin">
-	<?php echo form_open(base_url()); ?>
+	<?php echo form_open(site_url()); ?>
 
 		<h1 id="reply"><?php if(!isset($page['title'])){ ?>
 			<?php echo lang('paste_create_new'); ?>
@@ -114,7 +114,7 @@
 									"40320" => lang('exp_1m'),
 									"483840" => lang('exp_1y'),
 								);
-                            if(!config_item('disable_keep_forever')) {
+                            if(!$this->config->item('disable_keep_forever')) {
                                 $options['0'] = lang('exp_forever');
                             }
 

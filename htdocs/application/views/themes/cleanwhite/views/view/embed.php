@@ -18,8 +18,8 @@ $theme = $this->config->item('theme');
 
 //Carabiner
 $this->carabiner->config(array(
-    'script_dir' => 'themes/default/js/',
-    'style_dir'  => 'themes/' . $theme . '/css/',
+    'script_dir' => 'themes/' . $this->config->item('theme') . '/js/',
+    'style_dir'  => 'themes/' . $this->config->item('theme') . '/css/',
     'cache_dir'  => 'static/asset/',
     'base_uri'	 => base_url(),
     'combine'	 => true,
