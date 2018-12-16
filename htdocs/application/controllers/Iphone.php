@@ -30,8 +30,16 @@ class Iphone extends CI_Controller
 	public function view()
 	{
 		$this->load->model('pastes');
-		$data = $this->pastes->getPaste(3);
-		$this->_view('iphone/view', $data);
+		$check = $this->pastes->checkPaste(3);
+		if ($check)
+		{
+			$data = $this->pastes->getPaste(3);
+			$this->_view('iphone/view', $data);
+		}
+		else
+		{
+			show_404();
+		}
 	}
 
 	private function _view($v, $d)

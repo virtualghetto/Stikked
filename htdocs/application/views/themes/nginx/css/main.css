@@ -3,7 +3,7 @@ html {
 }
 
 body {
-	background-image: url('/themes/cleanwhite/images/bg.jpg');
+	background-image: url('/themes/nginx/images/bg.jpg');
 	background-repeat: repeat; /* repeat-x */
 	/* background-color: #E3E8F2; */
 	color: #222;

@@ -44,11 +44,12 @@ if(isset($insert)){
 
 <ul class="actions">
 	<div class="container">
-		<li><a href="<?=site_url("view/download/".$pid)?>"><img src="<?=site_url("themes/cleanwhite/images/download.png")?>" alt="disk" class="icon"/>Download Paste</a></li> 
-		<li><a href="#reply"><img src="<?=site_url("themes/cleanwhite/images/reply.png")?>" alt="speech bubble" class="icon"/>Reply to this paste</a></li>
-		<li><a href="<?=site_url("view/raw/".$pid)?>"><img src="<?=site_url("themes/cleanwhite/images/raw.png")?>" alt="blank document" class="icon"/>View Raw</a></li>
-		<li><a href="<?=site_url("view/embed/".$pid)?>"><img src="<?=site_url("themes/cleanwhite/images/expand.png")?>" alt="blank document" class="icon"/>Embed</a></li>
-		<li><a href="#" class="expand"><img src="<?=site_url("themes/cleanwhite/images/expand.png")?>" alt="arrows" class="icon"/>Expand paste to fill the whole browser</a></li>
+		<li><a href="<?=site_url("view/download/".$pid)?>"><img src="<?=site_url("themes/nginx/images/download.png")?>" alt="disk" class="icon"/>Download Paste</a></li> 
+		<li><a href="#reply"><img src="<?=site_url("themes/nginx/images/reply.png")?>" alt="speech bubble" class="icon"/>Reply to this paste</a></li>
+		<li><a href="<?=site_url("view/raw/".$pid)?>"><img src="<?=site_url("themes/nginx/images/raw.png")?>" alt="blank document" class="icon"/>View Raw</a></li>
+		<li><a href="<?=site_url("view/embed/".$pid)?>"><img src="<?=site_url("themes/nginx/images/expand.png")?>" alt="blank document" class="icon"/>Embed</a></li>
+		<li><a href="<?=site_url("iphone/view/".$pid)?>"><img src="<?=site_url("themes/nginx/images/expand.png")?>" alt="blank document" class="icon"/>Mobile</a></li>
+		<li><a href="#" class="expand"><img src="<?=site_url("themes/nginx/images/expand.png")?>" alt="arrows" class="icon"/>Expand paste to fill the whole browser</a></li>
 	</div>
 </ul>
 

@@ -48,6 +48,7 @@ if(isset($insert)){
 		<li><a href="#reply"><img src="<?=site_url("themes/cleanwhite/images/reply.png")?>" alt="speech bubble" class="icon"/>Reply to this paste</a></li>
 		<li><a href="<?=site_url("view/raw/".$pid)?>"><img src="<?=site_url("themes/cleanwhite/images/raw.png")?>" alt="blank document" class="icon"/>View Raw</a></li>
 		<li><a href="<?=site_url("view/embed/".$pid)?>"><img src="<?=site_url("themes/cleanwhite/images/expand.png")?>" alt="blank document" class="icon"/>Embed</a></li>
+		<li><a href="<?=site_url("iphone/view/".$pid)?>"><img src="<?=site_url("themes/cleanwhite/images/expand.png")?>" alt="blank document" class="icon"/>Mobile</a></li>
 		<li><a href="#" class="expand"><img src="<?=site_url("themes/cleanwhite/images/expand.png")?>" alt="arrows" class="icon"/>Expand paste to fill the whole browser</a></li>
 	</div>
 </ul>
