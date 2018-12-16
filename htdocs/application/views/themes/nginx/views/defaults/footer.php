@@ -12,6 +12,7 @@ if(isset($ace_modes)){
 }
 
 ?>
+</div></div></div></div>
 <div><footer class="footer">
 	Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo lang('powered_by'); ?> <a href="https://github.com/claudehohl/Stikked">Stikked<!-- version <?php echo config_item('stikked_version'); ?> --></a> <?php echo  (ENVIRONMENT === 'development') ?  '&amp; CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?>
 </footer></div>

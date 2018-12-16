@@ -582,7 +582,7 @@ class Main extends CI_Controller
 				$data['raw'] = character_limiter($data['raw'], 500);
 			}
 			$this->content_expiration(config_item('content_expiration'));
-			$this->load->view('themes/default/views/view/raw', $data);
+			$this->load->view('themes/' . config_item('theme') . '/views/view/raw', $data);
 		}
 		else
 		{
@@ -599,11 +599,11 @@ class Main extends CI_Controller
 		if ($check)
 		{
 			$this->load->helper('text');
-			$paste = $this->pastes->getPaste(3);
-			$data = $this->pastes->getReplies(3);
-			$data['page_title'] = $paste['title'] . ' - ' . config_item('site_name');
+			$data = $this->pastes->getPaste(3, false, false);
+			$data = $this->pastes->getReplies(3, $data);
+			$data['page_title'] = $data['title'] . ' - ' . config_item('site_name');
 			$data['feed_url'] = site_url('view/rss/' . $this->uri->segment(3));
-			$this->load->view('themes/default/views/view/rss', $data);
+			$this->load->view('themes/' . config_item('theme') . '/views/view/rss', $data);
 		}
 		else
 		{
@@ -651,7 +651,7 @@ class Main extends CI_Controller
 		if ($check)
 		{
 			$data = $this->pastes->getPaste(3);
-			$this->load->view('themes/default/views/view/download', $data);
+			$this->load->view('themes/' . config_item('theme') . '/views/view/download', $data);
 		}
 		else
 		{
@@ -679,7 +679,7 @@ class Main extends CI_Controller
 				$data['feed_url'] = site_url('lists/rss');
 				$data['replies'] = $data['pastes'];
 				unset($data['pastes']);
-				$this->load->view('themes/default/views/view/rss', $data);
+				$this->load->view('themes/' . config_item('theme') . '/views/view/rss', $data);
 			}
 			else
 			{
@@ -776,7 +776,7 @@ class Main extends CI_Controller
 		));
 
 		//view
-		$this->load->view('themes/default/views/view/captcha', array(
+		$this->load->view('themes/' . config_item('theme') . '/views/view/captcha', array(
 			'word' => $word
 		));
 	}
@@ -1042,7 +1042,7 @@ class Main extends CI_Controller
 		if (config_item('disallow_search_engines'))
 		{
 			header('Content-Type: text/plain; charset=utf-8');
-			$this->load->view('themes/default/views/robots_txt');
+			$this->load->view('themes/' . config_item('theme') . '/views/robots_txt');
 		}
 		else
 		{

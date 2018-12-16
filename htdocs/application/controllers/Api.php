@@ -59,7 +59,7 @@ class Api extends Main
 		if (!$this->input->post('text'))
 		{
 			$data['msg'] = 'Error: Missing paste text';
-			$this->load->view('themes/default/views/view/api', $data);
+			$this->load->view('themes/' . config_item('theme') . '/views/view/api', $data);
 		}
 		else
 		{
@@ -113,7 +113,7 @@ class Api extends Main
 			//create paste
 			$paste_url = $this->pastes->createPaste();
 			$data['msg'] = base_url() . $paste_url;
-			$this->load->view('themes/default/views/view/api', $data);
+			$this->load->view('themes/' . config_item('theme') . '/views/view/api', $data);
 		}
 	}
 	

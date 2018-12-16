@@ -36,11 +36,12 @@ if(isset($insert)){
 			<?php }?>
 			
 				<div class="spacer"></div>
-				<br />
+				<div class="spacer"></div>
+				<div class="spacer"></div>
+				<div class="spacer"></div>
 			</div>
 		</div>
 	</div>
-</div>
 
 <ul class="actions">
 	<div class="container">
@@ -49,15 +50,10 @@ if(isset($insert)){
 		<li><a href="<?=site_url("view/raw/".$pid)?>"><img src="<?=site_url("themes/nginx/images/raw.png")?>" alt="blank document" class="icon"/>View Raw</a></li>
 		<li><a href="<?=site_url("view/embed/".$pid)?>"><img src="<?=site_url("themes/nginx/images/expand.png")?>" alt="blank document" class="icon"/>Embed</a></li>
 		<li><a href="<?=site_url("iphone/view/".$pid)?>"><img src="<?=site_url("themes/nginx/images/expand.png")?>" alt="blank document" class="icon"/>Mobile</a></li>
-		<li><a href="#" class="expand"><img src="<?=site_url("themes/nginx/images/expand.png")?>" alt="arrows" class="icon"/>Expand paste to fill the whole browser</a></li>
 	</div>
 </ul>
 
-
-</div>
-</div>
-</div>
-</div>
+</div></div></div></div>
 
 <div class="paste">
 	<div class="text_formatted">
@@ -124,3 +120,4 @@ if(isset($insert)){
 
 </div>
 
+<div><div><div><div>

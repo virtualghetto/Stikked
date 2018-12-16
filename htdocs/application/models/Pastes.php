@@ -698,7 +698,7 @@ class Pastes extends CI_Model
 		}
 	}
 	
-	function getReplies($seg = 3) 
+	function getReplies($seg = 3, $data=array())
 	{
 		$amount = $this->config->item('per_page');
 		

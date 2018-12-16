@@ -14,6 +14,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
     <atom:link href="<?php echo $feed_url; ?>" rel="self" type="application/rss+xml" />
     <link><?php echo base_url(); ?></link>
     <language>en</language>
+<?php if (isset($replies)) { ?>
 <?php foreach($replies as $paste): ?>
 <item>
     <title><?php echo $paste['title']; ?></title>
@@ -25,5 +26,6 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
     <content:encoded><![CDATA[<?php echo $paste['paste']; ?>]]></content:encoded>
 </item>
 <?php endforeach; ?>
+<?php } ?>
 </channel>
 </rss>
